@@ -85,13 +85,13 @@ class User extends CI_Controller {
 	public function upload()
 	{
 		
-			include APPPATH.'third_party/PHPExcel/PHPExcel.php';
-			$excelreader = new PHPExcel_Reader_Excel2007();    
-			$loadexcel = $excelreader->load('tes.xlsx'); 
-			$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
+			// include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+			// $excelreader = new PHPExcel_Reader_Excel2007();    
+			// $loadexcel = $excelreader->load('tes.xlsx'); 
+			// $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
 			$data = [
 				'title' => 'Upload table',
-				'upload' => $sheet,
+				// 'upload' => $sheet,
 			];
 			
 		$this->load->view('temp/header',$data);
