@@ -26,13 +26,13 @@ function myFunction() {
 $(document).ready( function () {
     $('#upload').attr('hidden',true);
     $("#file").change(function(){
-        // const nama_file = $('#file').prop('files')[0].name;
+        const nama_file = $('#file').prop('files')[0].name;
         const fileupload = $('#file').prop('files')[0];
         // var nama_file = $('#nama_file').val();
         if (fileupload!="") {
             let formData = new FormData();
             formData.append('file', fileupload);
-            // formData.append('nama_file', nama_file);
+            formData.append('nama_file', nama_file);
             // console.log(basepath)
             $.ajax({
                 type: 'POST',

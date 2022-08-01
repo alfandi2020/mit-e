@@ -40,7 +40,6 @@ class User extends CI_Controller {
 		return $return_range;
 	}
 	public function upload_file(){
-		$filename = APPPATH.'tes.xlsx';
 	
 	  
 		  // Jika berhasil :
@@ -62,7 +61,7 @@ class User extends CI_Controller {
 		// );
 		// }
 
-		echo json_encode($sheet);
+		echo json_encode($_FILES['file']['tmp_name']."/".$_FILES['nama_file']);
 		// foreach ($sheet as $x) {
 		// 	// $this->session->set_userdata('data_excel',$sheet);
 		// 	// redirect('user/upload');
