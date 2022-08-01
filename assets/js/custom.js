@@ -19,9 +19,6 @@ $('div.collapse li a').filter(function() {
     return this.href == location.href
 }).parentsUntil(".nav > collapse li a").addClass('show');
 
-function myFunction() { 
-    document.getElementById("myFunction").submit(); 
-  }
 
 $(document).ready( function () {
     $('#upload').attr('hidden',true);
