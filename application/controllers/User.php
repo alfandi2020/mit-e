@@ -89,19 +89,14 @@ class User extends CI_Controller {
 			$excelreader = new PHPExcel_Reader_Excel2007();    
 			$loadexcel = $excelreader->load('tes.xlsx'); 
 			$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
-			$title = $loadexcel->getActiveSheet()->toArray();
-			$dataa = array();        
-			$numrow = 1;    
-		
 			$data = [
 				'title' => 'Upload table',
 				'upload' => $sheet,
-				'titlee'=> $title
 			];
 			
 		$this->load->view('temp/header',$data);
 		$this->load->view('body/user/upload',$data);
-		$this->load->view('temp/footer');
+		$this->load->view('temp/footer'); 	
 	}
 	
 	function submit_user(){
