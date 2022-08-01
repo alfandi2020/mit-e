@@ -126,8 +126,9 @@ $(document).ready( function () {
                         // }
 
                 },
-                error: function () {
+                error: function (error) {
                     alert("Data Gagal Diupload");
+                    console.log(error)
                 }
             });
         }
