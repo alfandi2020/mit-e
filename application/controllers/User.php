@@ -45,10 +45,10 @@ class User extends CI_Controller {
 		  // Jika berhasil :
 		//   $return = array('result' => 'success', 'file' => $this->upload->data(), 'error' => '');
 		//   var_dump($return['file']);
-		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
-		$excelreader = new PHPExcel_Reader_Excel2007();    
-		$loadexcel = $excelreader->load(isset($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : ''); 
-		$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
+		// include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+		// $excelreader = new PHPExcel_Reader_Excel2007();    
+		// $loadexcel = $excelreader->load(isset($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : ''); 
+		// $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
 		// var_dump($sheet);
 		// $data = array();
 		// foreach ($sheet as $x ) {
@@ -61,7 +61,7 @@ class User extends CI_Controller {
 		// );
 		// }
 
-		echo json_encode($sheet);
+		echo json_encode($_FILES['file']['tmp_name']);
 		// echo $_FILES['file']['tmp_name'];
 		// foreach ($sheet as $x) {
 		// 	// $this->session->set_userdata('data_excel',$sheet);
