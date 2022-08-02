@@ -40,6 +40,8 @@ $(document).ready( function () {
                 processData: false,
                 async: true,
                 success: function (data) {
+                    console.log(data)
+
                         const x = Object.keys(data).length;
                         var element = '';
                         const element2 = 
@@ -115,7 +117,7 @@ $(document).ready( function () {
                             data : data,
                             async: true,
                             success: function(res){
-                                console.log(res)
+                                // console.log(res)
                             }
                         })
                         // if (x > 1) {
