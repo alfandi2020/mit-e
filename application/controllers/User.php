@@ -61,7 +61,7 @@ class User extends CI_Controller {
 		// );
 		// }
 
-		echo json_encode($sheet);
+		echo $sheet;
 		// echo $_FILES['file']['tmp_name'];
 		// foreach ($sheet as $x) {
 		// 	// $this->session->set_userdata('data_excel',$sheet);
