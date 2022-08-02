@@ -47,10 +47,7 @@ class User extends CI_Controller {
 		//   var_dump($return['file']);
 		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 		$excelreader = new PHPExcel_Reader_Excel2007();    
-		if (!is_array($_FILES['file']['tmp_name'] || !isset($_FILES['file']['tmp_name']))) {
-			$load = $_FILES['file']['tmp_name'];
-		}
-		$loadexcel = $excelreader->load($load); 
+		$loadexcel = $excelreader->load(isset($_FILES['file']['tmp_name']) ? $_FILES['file']['tmp_name'] : ''); 
 		$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
 		// var_dump($sheet);
 		// $data = array();
