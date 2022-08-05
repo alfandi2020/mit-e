@@ -49,38 +49,65 @@ class User extends CI_Controller {
 		$excelreader = new PHPExcel_Reader_Excel2007();    
 		$loadexcel = $excelreader->load($_FILES['file']['tmp_name']); 
 		$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
-		// var_dump($sheet);
-		// $data = array();
-		// foreach ($sheet as $x ) {
-		// array_push(
-		// 	$data, 
-		// 	array(
-		// 		'tes' => $x['A'],
-		// 		'tesa' => $x['B']
-		// 	)
-		// );
-		// }
-
+		
+		array_unshift($sheet,"");//remove key
+		unset($sheet[0]);
 		echo json_encode($sheet);
-		// echo $_FILES['file']['tmp_name'];
-		// foreach ($sheet as $x) {
-		// 	// $this->session->set_userdata('data_excel',$sheet);
-		// 	// redirect('user/upload');
-			// echo $x['A'];
-			// echo $x['B'];
-		// 	// $this->session->unset_userdata('some_name');
-		// }
 
 	  }
 	  function submit_upload(){
 		  $data = $this->input->post();
+		//   $saldo_akhir = '';
+		// $arr = array();
+		// $saldo_excel = 0;
 		  foreach (array_slice($data,1) as $x) {
-				$insert = [
-					"A" => $x['A']
-				];
-				$this->db->insert('dt_excel',$insert);
-				echo $insert;
+			  $id_agent = $x['Z'];
+				$cek = $this->db->query("SELECT * FROM dt_agent where id_agent='$id_agent'")->row_array();
+				// if ($cek == 1) {
+					$saldo_excel = preg_replace('/[^\d.]/', '', $x['U']);
+					$xxx =  $cek['saldo'] - $saldo_excel;
+					
+					$insert = [
+						"A" => $x['B'],
+						"B" => $x['B'],
+						"C" => $x['C'],
+						"D" => $x['D'],
+						"E" => $x['E'],
+						"F" => $x['F'],
+						"G" => $x['G'],
+						"H" => $x['H'],
+						"I" => $x['I'],
+						"J" => $x['J'],
+						"K" => $x['K'],
+						"L" => $x['L'],
+						"M" => $x['M'],
+						"N" => $x['N'],
+						"O" => $x['O'],
+						"P" => $x['P'],
+						"Q" => $x['Q'],
+						"R" => $x['R'],
+						"S" => $x['S'],
+						"T" => $x['T'],
+						"U" => $x['U'],
+						"V" => $x['V'],
+						"W" => $x['W'],
+						"X" => $x['X'],
+						"Y" => $x['Y'],
+						"Z" => $x['Z'],
+						"saldo_akhir" => $xxx
+					];
+					$this->db->insert('dt_excel',$insert);
+					$arr[] = $xxx;
+					//update
+					// $this->db->set('saldo',$xxx);
+					// $this->db->where('id_agent',$id_agent);
+					// $this->db->update('dt_agent');
 		  }
+		//   $im = implode(',',$arr);
+		//   array_unshift($arr,2);
+			array_unshift($arr,"");
+			unset($arr[0]);
+		  echo json_encode($arr);
 	  }
 	public function upload()
 	{
@@ -98,7 +125,33 @@ class User extends CI_Controller {
 		$this->load->view('body/user/upload',$data);
 		$this->load->view('temp/footer'); 	
 	}
-	
+	function topup(){
+	$id_agent = $this->input->post('id_agent');
+	$saldo = $this->input->post('saldo');
+	if ($id_agent == true && $saldo == true) {
+		$this->db->set('saldo',$saldo);
+		$this->db->where('id',$id_agent);
+		$this->db->update('dt_agent');
+		redirect('user/topup');
+	}
+	$data = [
+			'title' => 'Topup',
+			'agent' => $this->db->get('dt_agent')->result(),
+	];
+		
+	$this->load->view('temp/header',$data);
+	$this->load->view('body/topup',$data);
+	$this->load->view('temp/footer'); 
+	}
+	function agent(){
+		$nama = $this->input->post('nama');
+		$data = [
+			"id_agent" => 123,
+			"nama" => $nama
+		];
+		$this->db->insert('dt_agent',$data);
+		redirect('user/topup');
+	}
 	function submit_user(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');

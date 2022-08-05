@@ -40,86 +40,99 @@ $(document).ready( function () {
                 processData: false,
                 async: true,
                 success: function (data) {
-                    console.log(data)
+                    console.log(Object.keys(data).length)
 
-                        const x = Object.keys(data).length;
-                        var element = '';
-                        const element2 = 
-                        '<tr>'+
-                        '<th>' + data[1].A + '<th>'+
-                        '<th>' + data[1].B + '<th>'+
-                        '<th>' + data[1].C + '<th>'+
-                        '<th>' + data[1].D + '<th>'+
-                        '<th>' + data[1].E + '<th>'+
-                        '<th>' + data[1].F + '<th>'+
-                        '<th>' + data[1].G + '<th>'+
-                        '<th>' + data[1].H + '<th>'+
-                        '<th>' + data[1].I + '<th>'+
-                        '<th>' + data[1].J + '<th>'+
-                        '<th>' + data[1].K + '<th>'+
-                        '<th>' + data[1].L + '<th>'+
-                        '<th>' + data[1].M + '<th>'+
-                        '<th>' + data[1].N + '<th>'+
-                        '<th>' + data[1].O + '<th>'+
-                        '<th>' + data[1].P + '<th>'+
-                        '<th>' + data[1].Q + '<th>'+
-                        '<th>' + data[1].R + '<th>'+
-                        '<th>' + data[1].S + '<th>'+
-                        '<th>' + data[1].T + '<th>'+
-                        '<th>' + data[1].U + '<th>'+
-                        '<th>' + data[1].V + '<th>'+
-                        '<th>' + data[1].W + '<th>'+
-                        '<th>' + data[1].X + '<th>'+
-                        '<th>' + data[1].Y + '<th>'+
-                        '<th>' + data[1].Z + '<th>'+
-                        '</tr>';
-                        for (let k = 2; k < 14; k++) {
-                         
-                            element += 
-                            '<tr>' + 
-                            '<td>' + data[k].A + '<td>'+
-                            '<td>' + data[k].B + '<td>'+
-                            '<td>' + data[k].C + '<td>'+
-                            '<td>' + data[k].D + '<td>'+
-                            '<td>' + data[k].E + '<td>'+
-                            '<td>' + data[k].F + '<td>'+
-                            '<td>' + data[k].G + '<td>'+
-                            '<td>' + data[k].H + '<td>'+
-                            '<td>' + data[k].K + '<td>'+
-                            '<td>' + data[k].J + '<td>'+
-                            '<td>' + data[k].K + '<td>'+
-                            '<td>' + data[k].L + '<td>'+
-                            '<td>' + data[k].M + '<td>'+
-                            '<td>' + data[k].N + '<td>'+
-                            '<td>' + data[k].O + '<td>'+
-                            '<td>' + data[k].P + '<td>'+
-                            '<td>' + data[k].Q + '<td>'+
-                            '<td>' + data[k].R + '<td>'+
-                            '<td>' + data[k].S + '<td>'+
-                            '<td>' + data[k].T + '<td>'+
-                            '<td>' + data[k].U + '<td>'+
-                            '<td>' + data[k].V + '<td>'+
-                            '<td>' + data[k].W + '<td>'+
-                            '<td>' + data[k].X + '<td>'+
-                            '<td>' + data[k].Y + '<td>'+
-                            '<td>' + data[k].Z + '<td>'+
-                           '</tr>';
-                          }
-                        $('#head2').html(element2)
-                        $('#body2').html(element)
-                        $('.zero-configuration2').DataTable({
-                            stateSave: true,
-                            "bDestroy": true
-                        });
                         $.ajax({
                             type: 'POST',
                             url: "submit_upload",
                             data : data,
+                            dataType: 'json',
                             async: true,
                             success: function(res){
-                                // console.log(res)
+                                // var saldo_terakhir = res.split(',')
+                                // // var saldo_ter = 0;
+                                // for (let l = 0; l < saldo_terakhir.length; l++) {
+                                //    saldo_ter = saldo_terakhir[l];
+                                // }
+                                console.log(res)
+                                const x = Object.keys(data).length;
+                                var element = '';
+                                const element2 = 
+                                '<tr>'+
+                                '<th>' + data[1].A + '  <th>'+
+                                '<th>' + data[1].B + '<th>'+
+                                '<th>' + data[1].C + '<th>'+
+                                '<th>' + data[1].D + '<th>'+
+                                '<th>' + data[1].E + '<th>'+
+                                '<th>' + data[1].F + '<th>'+
+                                '<th>' + data[1].G + '<th>'+
+                                '<th>' + data[1].H + '<th>'+
+                                '<th>' + data[1].I + '<th>'+
+                                '<th>' + data[1].J + '<th>'+
+                                '<th>' + data[1].K + '<th>'+
+                                '<th>' + data[1].L + '<th>'+
+                                '<th>' + data[1].M + '<th>'+
+                                '<th>' + data[1].N + '<th>'+
+                                '<th>' + data[1].O + '<th>'+
+                                '<th>' + data[1].P + '<th>'+
+                                '<th>' + data[1].Q + '<th>'+
+                                '<th>' + data[1].R + '<th>'+
+                                '<th>' + data[1].S + '<th>'+
+                                '<th>' + data[1].T + '<th>'+
+                                '<th>' + data[1].U + '<th>'+
+                                '<th>' + data[1].V + '<th>'+
+                                '<th>' + data[1].W + '<th>'+
+                                '<th>' + data[1].X + '<th>'+
+                                '<th>' + data[1].Y + '<th>'+
+                                '<th>' + data[1].Z + '<th>'+
+                                '<th>Saldo Akhir<th>'+
+                                '</tr>';
+                                for (let k = 2; k < Object.keys(data).length+1; k++) {
+                                    var saldo_x = data[k].U;
+                                    // if (Object.keys(data).length > 2) {
+                                    element += 
+                                    '<tr>' + 
+                                    '<td>' + data[k].A + '<td>'+
+                                    '<td>' + data[k].B + '<td>'+
+                                    '<td>' + data[k].C + '<td>'+
+                                    '<td>' + data[k].D + '<td>'+
+                                    '<td>' + data[k].E + '<td>'+
+                                    '<td>' + data[k].F + '<td>'+
+                                    '<td>' + data[k].G + '<td>'+
+                                    '<td>' + data[k].H + '<td>'+
+                                    '<td>' + data[k].I + '<td>'+
+                                    '<td>' + data[k].J + '<td>'+
+                                    '<td>' + data[k].K + '<td>'+
+                                    '<td>' + data[k].L + '<td>'+
+                                    '<td>' + data[k].M + '<td>'+
+                                    '<td>' + data[k].N + '<td>'+
+                                    '<td>' + data[k].O + '<td>'+
+                                    '<td>' + data[k].P + '<td>'+
+                                    '<td>' + data[k].Q + '<td>'+
+                                    '<td>' + data[k].R + '<td>'+
+                                    '<td>' + data[k].S + '<td>'+
+                                    '<td>' + data[k].T + '<td>'+
+                                    '<td>' + data[k].U + '<td>'+
+                                    '<td>' + data[k].V + '<td>'+
+                                    '<td>' + data[k].W + '<td>'+
+                                    '<td>' + data[k].X + '<td>'+
+                                    '<td>' + data[k].Y + '<td>'+
+                                    '<td>' + data[k].Z + '<td>'+
+                                    '<td>' +  res[k-1] + '<td>'+
+                                   '</tr>';
+                                  }
+                                $('#head2').html(element2)
+                                $('#body2').html(element)
+                                $('.zero-configuration2').DataTable({
+                                    stateSave: true,
+                                    "bDestroy": true,
+                                    order: [[1, 'asc']]
+                                });
+                            // }
+
                             }
                         })
+                        
                         // if (x > 1) {
                         //     $('#upload').attr('hidden',false);
                         // }

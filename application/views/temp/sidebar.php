@@ -27,8 +27,12 @@
                         </li> -->
                         <li><a href="<?= base_url('user/upload') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Upload</span></a>
                         </li>
-                        <li><a href="<?= base_url('user') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
+                        <li><a href="<?= base_url('user/topup') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Top Up</span></a>
                         </li>
+                        <!-- <li><a href="<?= base_url('user/topup') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List"></span></a>
+                        </li> -->
+                        <!-- <li><a href="<?= base_url('user') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
+                        </li> -->
                       
                     </ul>
                 </li>
@@ -44,8 +48,8 @@
                 <!-- <li class=" nav-item"><a href="<?= base_url('paket') ?>"><i class="feather icon-calendar"></i><span class="menu-title" data-i18n="Calender">Paket internet</span></a> -->
                 <li class=" nav-item"><a href="#"><i class="feather icon-user"></i><span class="menu-title" data-i18n="User">Laporan</span></a>
                     <ul class="menu-content">
-                        <li><a href="<?= base_url('laporan/create') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Buat User</span></a>
-                        </li>
+                        <!-- <li><a href="<?= base_url('laporan/create') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Buat User</span></a>
+                        </li> -->
                         <li><a href="<?= base_url('laporan') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="View">View</span></a>
                         </li>
                       

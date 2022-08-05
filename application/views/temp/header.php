@@ -85,7 +85,7 @@ function range_excel($start = 'A', $end = 'ZZ'){
         content="admin template, Vuexy admin template, dashboard template, flat admin template, responsive admin template, web app">
     <meta name="author" content="PIXINVENT">
     <title><?= $title ?></title>
-    <link rel="apple-touch-icon" href="<?= base_url() ?>assets/images/ico/apple-icon-120.png">
+    <!-- <link rel="apple-touch-icon" href="<?= base_url() ?>assets/images/ico/apple-icon-120.png"> -->
     <link rel="shortcut icon" type="image/x-icon" href="<?= base_url() ?>assets/images/ico/favicon.ico">
     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600" rel="stylesheet">
 
@@ -118,7 +118,7 @@ function range_excel($start = 'A', $end = 'ZZ'){
     <link rel="stylesheet" type="text/css" href="<?= base_url()?>assets/vendors/css/forms/select/select2.min.css">
     <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/vendors/css/tables/datatable/datatables.min.css">
     <!-- BEGIN: Custom CSS-->
-    <link rel="stylesheet" type="text/css" href="../../../assets/css/style.css">
+    <!-- <link rel="stylesheet" type="text/css" href="<?= base_url() ?>assets/css/style.css"> -->
     <!-- END: Custom CSS-->
 
 </head>
