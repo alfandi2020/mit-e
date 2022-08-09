@@ -118,7 +118,7 @@ $(document).ready( function () {
                                     '<td>' + data[k].X + '<td>'+
                                     '<td>' + data[k].Y + '<td>'+
                                     '<td>' + data[k].Z + '<td>'+
-                                    '<td>' +  res[k-1] + '<td>'+
+                                    '<td>' + res[k-1] + '<td>'+
                                    '</tr>';
                                   }
                                 $('#head2').html(element2)

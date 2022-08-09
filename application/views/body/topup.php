@@ -68,7 +68,7 @@
                                         <?php
                                             foreach ($agent as $x) {
                                         ?>
-                                            <option value="<?= $x->id ?>"><?= $x->nama ?></option>
+                                            <option value="<?= $x->id_agent ?>"><?= $x->nama ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>

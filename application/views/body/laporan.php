@@ -36,6 +36,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kode Agent</th>
+                                        <th>AWB</th>
                                         <th>Tanggal</th>
                                         <th style="text-align:right">Saldo</th>
                                         <!-- <th width="230">Action</th> -->

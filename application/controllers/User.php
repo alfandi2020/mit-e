@@ -100,9 +100,9 @@ class User extends CI_Controller {
 					$this->db->insert('dt_excel',$insert);
 					$arr[] = $xxx;
 					//update
-					// $this->db->set('saldo',$xxx);
-					// $this->db->where('id_agent',$id_agent);
-					// $this->db->update('dt_agent');
+					$this->db->set('saldo',$xxx);
+					$this->db->where('id_agent',$id_agent);
+					$this->db->update('dt_agent');
 		  }
 		//   $im = implode(',',$arr);
 		//   array_unshift($arr,2);
@@ -110,7 +110,66 @@ class User extends CI_Controller {
 			unset($arr[0]);
 		  echo json_encode($arr);
 	  }
-	  function submit_ljn()
+	public function upload()
+	{
+		
+			// include APPPATH.'third_party/PHPExcel/PHPExcel.php';
+			// $excelreader = new PHPExcel_Reader_Excel2007();    
+			// $loadexcel = $excelreader->load('tes.xlsx'); 
+			// $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
+			$data = [
+				'title' => 'Upload table',
+				// 'upload' => $sheet,
+			];
+			
+		$this->load->view('temp/header',$data);
+		$this->load->view('body/user/upload',$data);
+		$this->load->view('temp/footer'); 	
+	}
+	function clean2($string) {
+		$string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+	 
+		return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+	 }
+	 
+	function topup(){
+	$id_agent = $this->input->post('id_agent');
+	$saldo = $this->input->post('saldo');
+	if ($id_agent == true && $saldo == true) {
+		//insert
+		$insert = [
+			"A" => "TOP UP",
+			"F" => date('d-m-Y'),
+			"U" => $this->clean2($saldo)
+		];
+		$this->db->insert('dt_excel',$insert);
+
+		$cek = $this->db->query("SELECT * FROM dt_agent where id_agent='$id_agent'")->row_array();
+		//update dt_agent saldo
+		$this->db->set('saldo',$cek['saldo']+ $this->clean2($saldo));
+		$this->db->where('id_agent',$id_agent);
+		$this->db->update('dt_agent');
+		redirect('user/topup');
+	}
+	$data = [
+			'title' => 'Topup',
+			'agent' => $this->db->get('dt_agent')->result(),
+	];
+		
+	$this->load->view('temp/header',$data);
+	$this->load->view('body/topup',$data);
+	$this->load->view('temp/footer'); 
+	}
+	function agent(){
+		$nama = $this->input->post('nama');
+		$data = [
+			"id_agent" => 123,
+			"nama" => $nama
+		];
+		$this->db->insert('dt_agent',$data);
+		redirect('user/topup');
+	}
+	function submit_ljn()
 	  {
 		$data = $this->input->post();
 
@@ -152,49 +211,6 @@ class User extends CI_Controller {
 					echo json_encode($cek);
 		  }
 	  }
-	public function upload()
-	{
-		
-			// include APPPATH.'third_party/PHPExcel/PHPExcel.php';
-			// $excelreader = new PHPExcel_Reader_Excel2007();    
-			// $loadexcel = $excelreader->load('tes.xlsx'); 
-			// $sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
-			$data = [
-				'title' => 'Upload table',
-				// 'upload' => $sheet,
-			];
-			
-		$this->load->view('temp/header',$data);
-		$this->load->view('body/user/upload',$data);
-		$this->load->view('temp/footer'); 	
-	}
-	function topup(){
-	$id_agent = $this->input->post('id_agent');
-	$saldo = $this->input->post('saldo');
-	if ($id_agent == true && $saldo == true) {
-		$this->db->set('saldo',$saldo);
-		$this->db->where('id',$id_agent);
-		$this->db->update('dt_agent');
-		redirect('user/topup');
-	}
-	$data = [
-			'title' => 'Topup',
-			'agent' => $this->db->get('dt_agent')->result(),
-	];
-		
-	$this->load->view('temp/header',$data);
-	$this->load->view('body/topup',$data);
-	$this->load->view('temp/footer'); 
-	}
-	function agent(){
-		$nama = $this->input->post('nama');
-		$data = [
-			"id_agent" => 123,
-			"nama" => $nama
-		];
-		$this->db->insert('dt_agent',$data);
-		redirect('user/topup');
-	}
 	function submit_user(){
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
