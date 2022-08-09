@@ -66,14 +66,15 @@ class User extends CI_Controller {
 				// if ($cek == 1) {
 					$saldo_excel = preg_replace('/[^\d.]/', '', $x['U']);
 					$xxx =  $cek['saldo'] - $saldo_excel;
-					
+					$z = strtotime($x['F']);
+					$datex =  date('d-m-Y',$z);
 					$insert = [
 						"A" => $x['B'],
 						"B" => $x['B'],
 						"C" => $x['C'],
 						"D" => $x['D'],
 						"E" => $x['E'],
-						"F" => $x['F'],
+						"F" => $datex,
 						"G" => $x['G'],
 						"H" => $x['H'],
 						"I" => $x['I'],
@@ -108,6 +109,48 @@ class User extends CI_Controller {
 			array_unshift($arr,"");
 			unset($arr[0]);
 		  echo json_encode($arr);
+	  }
+	  function submit_ljn()
+	  {
+		$data = $this->input->post();
+
+		  foreach ($data as $x) {
+			//   $id_agent = $x['Z'];
+			// 	$cek = $this->db->query("SELECT * FROM dt_agent where id_agent='$id_agent'")->row_array();
+				// if ($cek == 1) {
+					// $saldo_excel = preg_replace('/[^\d.]/', '', $x['U']);
+					// $xxx =  $cek['saldo'] - $saldo_excel;
+					
+					$insert = [
+						"nama" => $x['A'],
+						"alamat" => $x['B'],
+						"telp" => $x['C'],
+						"ktp" => $x['D'],
+						"npwp" => $x['E'],
+						"email" => $x['F'],
+						"tindakan" => "Pribadi",
+						"t_nama"=>$x['A'],
+						"t_nomor_ktp"=>$x['D'],
+						"t_telp"=>$x['C'],
+						"t_email"=>$x['F'],
+						"speed" => $x['G'],
+						"media" => "Fiber Optik",
+						"cpe" => $x['H'],
+						"router" => $x['I'],
+						"aktif" => $x['J'],
+						"off" => $x['K'],
+						"teknisi" => $x['L'],
+						"group" => $x['M'],
+						"status" => $x['N'],
+					];
+					$cek = $this->db->insert('dt_registrasi',$insert);
+					// $arr[] = $xxx;
+					//update
+					// $this->db->set('saldo',$xxx);
+					// $this->db->where('id_agent',$id_agent);
+					// $this->db->update('dt_agent');
+					echo json_encode($cek);
+		  }
 	  }
 	public function upload()
 	{
