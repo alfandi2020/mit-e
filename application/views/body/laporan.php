@@ -52,7 +52,7 @@
                                     if ($agent_get == true) { 
                                        $date1 = date('d-m-Y',$start);
                                        $date2 = date('d-m-Y',$end);
-                                    $cek = $this->db->query("SELECT * FROM dt_excel where z='$agent_get' and f between '$date1' and '$date2'")->result();
+                                    $cek = $this->db->query("SELECT * FROM dt_excel where z like '%$agent_get%' and f between '$date1' and '$date2'")->result();
                                     foreach ($cek as $x) {
                                         ?>
                                        <tr>

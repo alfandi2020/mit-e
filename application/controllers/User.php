@@ -69,7 +69,7 @@ class User extends CI_Controller {
 					$z = strtotime($x['F']);
 					$datex =  date('d-m-Y',$z);
 					$insert = [
-						"A" => $x['B'],
+						"A" => $x['A'],
 						"B" => $x['B'],
 						"C" => $x['C'],
 						"D" => $x['D'],
