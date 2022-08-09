@@ -36,6 +36,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kode Agent</th>
+                                        <th>Tanggal</th>
                                         <th style="text-align:right">Saldo</th>
                                         <!-- <th width="230">Action</th> -->
                                     </tr>
@@ -57,6 +58,7 @@
                                        <tr>
                                             <td><?= $no++; ?></td>
                                             <td><?= $x->A?></td>
+                                            <td><?= $x->F?></td>
                                             <td align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
                                        </tr>
                                     <?php
