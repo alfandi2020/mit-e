@@ -99,11 +99,18 @@ class User extends CI_Controller {
 					];
 					$this->db->insert('dt_excel',$insert);
 					$arr[] = $xxx;
+					$sum_saldo[] = $saldo_excel;
 					//update
 					$this->db->set('saldo',$xxx);
 					$this->db->where('id_agent',$id_agent);
 					$this->db->update('dt_agent');
 		  }
+		  $xx = [
+			"A" => "TOP UP",
+			"F" => date('d-m-Y'),
+			"U" => array_sum($sum_saldo)
+		  ];
+		  $this->db->insert('dt_excel',$xx);
 		//   $im = implode(',',$arr);
 		//   array_unshift($arr,2);
 			array_unshift($arr,"");
