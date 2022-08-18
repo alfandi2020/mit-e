@@ -27,6 +27,9 @@
                                     </div>
                                     <div class="col-xl-4 mt-2">
                                         <button type="submit" class="btn btn-primary">Filter</button>
+                                        <?php if($this->input->get('agent')){ ?>
+                                            <a target="_blank" href="<?= base_url('laporan/pdf/'.$this->input->get('agent')) ?>" class="btn btn-success">Pdf</a>
+                                        <?php } ?>
                                     </div>
                                 </div> 
                             </form>
@@ -36,9 +39,9 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Kode Agent</th>
-                                        <th>AWB</th>
                                         <th>Tanggal</th>
                                         <th style="text-align:right">Saldo</th>
+                                        <!-- <th>Action</th> -->
                                         <!-- <th width="230">Action</th> -->
                                     </tr>
                                 </thead>
@@ -61,26 +64,13 @@
                                             <td><?= $x->A?></td>
                                             <td><?= $x->F?></td>
                                             <td align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
+                                            <!-- <td>
+                                                <a target="_blank" href="<?= base_url('laporan/pdf/'.$x->id) ?>" class="btn btn-primary">PDF</a>
+                                            </td> -->
                                        </tr>
                                     <?php
-                                        } 
-                                    }else{
-                                         foreach ($agent as $x) {
-                                        ?>
-                                    <tr>
-                                        <td><?= $no++; ?></td>
-                                        <td><?= $x->id_agent ?></td>
-                                        <td><?= $x->nama ?></td>
-                                        <td align="right"><?= "Rp.". number_format($x->saldo,0,".",".") ?></td>
-                                        <!-- <td>
-                                            <button id="<?= $x->id ?>" class="btn btn-primary update-user"> <i class="feather icon-edit"></i> Edit</button>&nbsp;&nbsp;
-                                            <?php if ($x->id != 1) { ?>
-                                            <a href="<?= base_url('user/delete/').$x->id ?>" class="btn btn-danger confirm-delete"> <i class="feather icon-trash-2"></i> Delete</a>
-                                            <?php } ?>
-                                        </td> -->
-                                    </tr>
-                                    <?php } 
-                                    }?>
+                                        }
+                                     } ?>
                                     
                                     
                                 </tbody>
