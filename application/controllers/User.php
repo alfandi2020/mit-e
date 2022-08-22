@@ -147,7 +147,8 @@ class User extends CI_Controller {
 		$insert = [
 			"A" => "TOP UP",
 			"F" => date('d-m-Y'),
-			"U" => $this->clean2($saldo)
+			"U" => $this->clean2($saldo),
+			"Z" =>$this->clean2($saldo)
 		];
 		$this->db->insert('dt_excel',$insert);
 

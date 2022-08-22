@@ -47,35 +47,35 @@
                                 </thead>
                                 <tbody>
                                     <?php 
-                                        $no=1; 
-
                                     $start = strtotime($this->input->get('start'));
                                     $end = strtotime($this->input->get('end'));
                                     $agent_get = $this->input->get('agent');
                                     
                                     if ($agent_get == true) { 
+                                        $no=1; 
+
                                        $date1 = date('d-m-Y',$start);
                                        $date2 = date('d-m-Y',$end);
-                                    $cek = $this->db->query("SELECT * FROM dt_excel where z like '%$agent_get%' and f between '$date1' and '$date2'")->result();
+                                    $cek = $this->db->query("SELECT * FROM dt_excel where z like '$agent_get' and f between '$date1' and '$date2'")->result();
                                     foreach ($cek as $x) {
+                                        if ($x->A != "TOP UP") {
                                         ?>
                                        <tr style="background-color: #fd79a8;">
                                             <td style="color:white;"><?= $no++; ?></td>
                                             <td style="color:white;"><?= $x->A?></td>
                                             <td style="color:white;"><?= $x->F?></td>
                                             <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
-                                            <!-- <td>
-                                                <a target="_blank" href="<?= base_url('laporan/pdf/'.$x->id) ?>" class="btn btn-primary">PDF</a>
-                                            </td> -->
                                        </tr>
                                     <?php
+                                            }else{?>
+                                        <tr style="background-color: #55efc4;">
+                                            <td style="color:white;"><?= $no++; ?></td>
+                                            <td style="color:white;"><?= $x->A?></td>
+                                            <td style="color:white;"><?= $x->F?></td>
+                                            <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
+                                       </tr>
+                                        <?php }
                                         }?>
-                                    <tr style="background-color: #55efc4;">
-                                    <td>TOP UP</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td align="right"><?= "Rp." . number_format($x->U,0,".","." )?></td>
-                                    </tr>
                                     <?php } ?>
                                    
                                     
