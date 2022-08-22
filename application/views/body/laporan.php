@@ -59,7 +59,7 @@
                                     $cek = $this->db->query("SELECT * FROM dt_excel where z like '%$agent_get%' and f between '$date1' and '$date2'")->result();
                                     foreach ($cek as $x) {
                                         ?>
-                                       <tr style="background-color: #e74c3c;">
+                                       <tr style="background-color: #fd79a8;">
                                             <td style="color:white;"><?= $no++; ?></td>
                                             <td style="color:white;"><?= $x->A?></td>
                                             <td style="color:white;"><?= $x->F?></td>
@@ -70,7 +70,7 @@
                                        </tr>
                                     <?php
                                         }?>
-                                    <tr style="background-color: #28C76F;">
+                                    <tr style="background-color: #55efc4;">
                                     <td>TOP UP</td>
                                     <td></td>
                                     <td></td>

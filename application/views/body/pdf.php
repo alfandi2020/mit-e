@@ -25,7 +25,7 @@ table {
         </tr>
         <tbody>
             <?php foreach($report as $x){?>
-            <tr style="background-color: #e74c3c;color:white;">
+            <tr style="background-color: #fd79a8;color:white;">
                 <td> <?= $x->A ?></td>
                 <td><?= $x->Z ?></td>
                 <td><?= $x->C ?></td>
@@ -34,7 +34,7 @@ table {
                 <td align="right"><?= "Rp.".number_format($x->saldo_akhir,0,".",".") ?></td>
             </tr>
             <?php } ?>
-            <tr style="background-color: #28C76F;">
+            <tr style="background-color: #55efc4;">
                 <td>TOP UP</td>
                 <td></td>
                 <td></td>
