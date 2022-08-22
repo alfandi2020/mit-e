@@ -69,9 +69,15 @@
                                             </td> -->
                                        </tr>
                                     <?php
-                                        }
-                                     } ?>
-                                    
+                                        }?>
+                                    <tr style="background-color: #14f73e;">
+                                    <td>TOP UP</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td align="right"><?= "Rp." . number_format($x->U,0,".","." )?></td>
+                                    </tr>
+                                    <?php } ?>
+                                   
                                     
                                 </tbody>
                             </table>

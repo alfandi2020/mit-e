@@ -40,7 +40,7 @@ table {
                 <td></td>
                 <td></td>
                 <td></td>
-                    <td align="right"><?= "Rp." . number_format($x->U,0,".","." )?></td>
+                <td align="right"><?= "Rp." . number_format($x->U,0,".","." )?></td>
                 </tr>
         </tbody>
     </table> 
