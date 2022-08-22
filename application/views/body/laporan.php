@@ -59,18 +59,18 @@
                                     $cek = $this->db->query("SELECT * FROM dt_excel where z like '%$agent_get%' and f between '$date1' and '$date2'")->result();
                                     foreach ($cek as $x) {
                                         ?>
-                                       <tr>
-                                            <td><?= $no++; ?></td>
-                                            <td><?= $x->A?></td>
-                                            <td><?= $x->F?></td>
-                                            <td align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
+                                       <tr style="background-color: #e74c3c;">
+                                            <td style="color:white;"><?= $no++; ?></td>
+                                            <td style="color:white;"><?= $x->A?></td>
+                                            <td style="color:white;"><?= $x->F?></td>
+                                            <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
                                             <!-- <td>
                                                 <a target="_blank" href="<?= base_url('laporan/pdf/'.$x->id) ?>" class="btn btn-primary">PDF</a>
                                             </td> -->
                                        </tr>
                                     <?php
                                         }?>
-                                    <tr style="background-color: #14f73e;">
+                                    <tr style="background-color: #28C76F;">
                                     <td>TOP UP</td>
                                     <td></td>
                                     <td></td>
