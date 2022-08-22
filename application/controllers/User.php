@@ -105,12 +105,13 @@ class User extends CI_Controller {
 					$this->db->where('id_agent',$id_agent);
 					$this->db->update('dt_agent');
 		  }
-		  $xx = [
-			"A" => "TOP UP",
-			"F" => date('d-m-Y'),
-			"U" => array_sum($sum_saldo)
-		  ];
-		  $this->db->insert('dt_excel',$xx);
+		//   $xx = [
+		// 	"A" => "TOP UP",
+		// 	"F" => date('d-m-Y'),
+		// 	"U" => array_sum($sum_saldo)
+		//   ];
+		//   $this->db->insert('dt_excel',$xx);
+
 		//   $im = implode(',',$arr);
 		//   array_unshift($arr,2);
 			array_unshift($arr,"");
@@ -144,19 +145,26 @@ class User extends CI_Controller {
 	$saldo = $this->input->post('saldo');
 	if ($id_agent == true && $saldo == true) {
 		//insert
+		$cek = $this->db->query("SELECT * FROM dt_agent where id_agent='$id_agent'")->row_array();
+
 		$insert = [
 			"A" => "TOP UP",
 			"F" => date('d-m-Y'),
 			"U" => $this->clean2($saldo),
-			"Z" =>$this->clean2($saldo)
+			"saldo_akhir" =>$cek['saldo']+ $this->clean2($saldo)
 		];
 		$this->db->insert('dt_excel',$insert);
 
-		$cek = $this->db->query("SELECT * FROM dt_agent where id_agent='$id_agent'")->row_array();
 		//update dt_agent saldo
 		$this->db->set('saldo',$cek['saldo']+ $this->clean2($saldo));
 		$this->db->where('id_agent',$id_agent);
 		$this->db->update('dt_agent');
+		$history = [
+			"kode_agent" => $id_agent,
+			"saldo" => $this->clean2($saldo),
+			"date" => date('Y-m-d')
+		];
+		$this->db->insert('history_topup',$history);
 		redirect('user/topup');
 	}
 	$data = [

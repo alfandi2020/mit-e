@@ -74,7 +74,7 @@
                                             <td style="color:white;"><?= $no++; ?></td>
                                             <td style="color:white;"><?= $x->A?></td>
                                             <td style="color:white;"><?= $x->F?></td>
-                                            <td style="color:white;"><?= $x->U?></td>
+                                            <td style="color:white;"><?="Rp.". number_format($x->U,0,".",".")?></td>
                                             <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
                                        </tr>
                                         <?php }
