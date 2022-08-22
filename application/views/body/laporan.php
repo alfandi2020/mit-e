@@ -33,6 +33,14 @@
                                     </div>
                                 </div> 
                             </form>
+                            <br>
+                        <?php 
+                        $agent_get = $this->input->get('agent');
+                        if ($agent_get == true) { 
+                            $get_saldo = $this->db->query("SELECT * FROM dt_agent where id_agent='$agent_get'")->row_array();
+                            ?>
+                            <h6>Saldo Terakhir : Rp.<?= number_format($get_saldo['saldo'],0,".",".") ?></h6>
+                        <?php } ?>
                         <div class="table-responsive">
                             <table class="table zero-configuration" >
                                 <thead>
