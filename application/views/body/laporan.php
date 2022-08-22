@@ -40,6 +40,7 @@
                                         <th>No</th>
                                         <th>Kode Agent</th>
                                         <th>Tanggal</th>
+                                        <th>Nominal</th>
                                         <th style="text-align:right">Saldo</th>
                                         <!-- <th>Action</th> -->
                                         <!-- <th width="230">Action</th> -->
@@ -60,18 +61,20 @@
                                     foreach ($cek as $x) {
                                         if ($x->A != "TOP UP") {
                                         ?>
-                                       <tr style="background-color: #fd79a8;">
+                                       <tr style="background-color: #fd79a8;font-weight:bold;">
                                             <td style="color:white;"><?= $no++; ?></td>
                                             <td style="color:white;"><?= $x->A?></td>
                                             <td style="color:white;"><?= $x->F?></td>
+                                            <td style="color:white;"><?= $x->U?></td>
                                             <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
                                        </tr>
                                     <?php
                                             }else{?>
-                                        <tr style="background-color: #55efc4;">
+                                        <tr style="background-color: #55efc4;font-weight:bold;">
                                             <td style="color:white;"><?= $no++; ?></td>
                                             <td style="color:white;"><?= $x->A?></td>
                                             <td style="color:white;"><?= $x->F?></td>
+                                            <td style="color:white;"><?= $x->U?></td>
                                             <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
                                        </tr>
                                         <?php }
