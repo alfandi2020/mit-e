@@ -46,7 +46,7 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Kode Agent</th>
+                                        <th>AWB</th>
                                         <th>Tanggal</th>
                                         <th>Nominal</th>
                                         <th style="text-align:right">Saldo</th>
