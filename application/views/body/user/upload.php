@@ -20,7 +20,7 @@
                                     </fieldset>
                                 </div>
                                 <div class="col-xl-4">
-                                    <button type="button" class="btn btn-primary mt-2" id="preview_submit">Upload</button>
+                                    <button type="button" class="btn btn-primary mt-2" id="upload_submit">Upload</button>
                                 </div>
                             </div>
                         </div>
