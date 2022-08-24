@@ -47,13 +47,12 @@ class User extends CI_Controller {
 		//   var_dump($return['file']);
 		include APPPATH.'third_party/PHPExcel/PHPExcel.php';
 		$excelreader = new PHPExcel_Reader_Excel2007();    
-		$loadexcel = $excelreader->load($_FILES['file']['tmp_name']); 
+		$loadexcel = $excelreader->load($_FILES['filex']['tmp_name']); 
 		$sheet = $loadexcel->getActiveSheet()->toArray(null, true, true ,true);        
 		
 		array_unshift($sheet,"");//remove key
 		unset($sheet[0]);
 		echo json_encode($sheet);
-
 	  }
 	  function submit_upload(){
 		  $data = $this->input->post();

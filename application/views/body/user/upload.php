@@ -13,19 +13,16 @@
                                     <fieldset class="form-group">
                                         <label for="basicInputFile">Upload File</label>
                                         <div class="custom-file">
-                                            <input type="file" id="file" name="file" class="custom-file-input"
+                                            <input type="file" id="filex" name="filex" class="custom-file-input"
                                                 id="inputGroupFile01">
                                             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
                                         </div>
                                     </fieldset>
                                 </div>
-                            </div>
-                            <!-- <div class="row">
                                 <div class="col-xl-4">
-                                    <input type="text" id="data_excel">
-                                    <button type="submit" id="upload" class="btn btn-primary">Upload </button>
+                                    <button type="button" class="btn btn-primary mt-2" id="preview_submit">Upload</button>
                                 </div>
-                            </div> -->
+                            </div>
                         </div>
                     </div>
                 </form>

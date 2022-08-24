@@ -37,7 +37,7 @@
                         <?php 
                         $agent_get = $this->input->get('agent');
                         if ($agent_get == true) { 
-                            $get_saldo = $this->db->query("SELECT * FROM dt_agent where id_agent='$agent_get'")->row_array();
+                            $get_saldo = $this->db->query("SELECT * FROM dt_agent where id_agent='$agent_get' ")->row_array();
                             ?>
                             <h6>Saldo akhir : Rp.<?= number_format($get_saldo['saldo'],0,".",".") ?></h6>
                         <?php } ?>
@@ -65,7 +65,7 @@
 
                                        $date1 = date('d-m-Y',$start);
                                        $date2 = date('d-m-Y',$end);
-                                    $cek = $this->db->query("SELECT * FROM dt_excel where z like '%$agent_get%' or f between '$date1' and '$date2' order by id asc")->result();
+                                    $cek = $this->db->query("SELECT * FROM dt_excel where z like '%$agent_get%' or f between '$date1' and '$date2' order by id desc")->result();
                                     foreach ($cek as $x) {
                                         if ($x->A != "TOP UP") {
                                         ?>
@@ -79,11 +79,11 @@
                                     <?php
                                             }else{?>
                                         <tr style="background-color: #55efc4;font-weight:bold;">
-                                            <td style="color:white;"><?= $no++; ?></td>
-                                            <td style="color:white;"><?= $x->A?></td>
-                                            <td style="color:white;"><?= $x->F?></td>
-                                            <td style="color:white;"><?="Rp.". number_format($x->U,0,".",".")?></td>
-                                            <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
+                                            <td style="color:black;"><?= $no++; ?></td>
+                                            <td style="color:black;"><?= $x->A?></td>
+                                            <td style="color:black;"><?= $x->F?></td>
+                                            <td style="color:black;"><?="Rp.". number_format($x->U,0,".",".")?></td>
+                                            <td style="color:black;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
                                        </tr>
                                         <?php }
                                         }?>

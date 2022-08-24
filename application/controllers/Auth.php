@@ -19,6 +19,7 @@ class Auth extends CI_Controller {
                             $datax = [
                                 'id_user' => $data['id'],
                                 'username' => $data['username'],
+                                'role' => $data['role']
                             ];
                             $this->session->set_userdata($datax);
                             $this->session->set_flashdata("msg", "<div class='alert alert-success'>Login Berhasil</div>");
