@@ -499,6 +499,79 @@ $('.confirm-delete').on('click', function(e) {
 //     console.log(selectedValA)
 //     $(`.ktp_simChange[value=${selectedValA}]`).prop("checked", isAChecked);
 // });
+$('#submit_user').click(function(){
+    var form = $('#form-user')
+    var data  = form.serialize();
+    $.ajax({
+            type :"POST",
+            url : "submit_user",
+            dataType : 'json',
+            data : data,
+        success : function(data){
+            if (data.response == "error") {
+                Swal.fire({
+                    title: "Opss!",
+                    text: data.message,
+                    type: "error",
+                    confirmButtonClass: 'btn btn-primary',
+                    buttonsStyling: false,
+                  });
+            }else if (data.response == "double") {
+                Swal.fire({
+                    title: "Opss!",
+                    text: data.message,
+                    type: "error",
+                    confirmButtonClass: 'btn btn-primary',
+                    buttonsStyling: false,
+                  });
+            }else if (data.response == "success") {
+                Swal.fire({
+                    title: 'Berhasil',
+                    html: data.message,
+                    timer: 2000,
+                    // confirmButtonClass: 'btn btn-primary',
+                    // buttonsStyling: false,
+                    
+                    onBeforeOpen: function () {
+                      Swal.showLoading()
+                      timerInterval = setInterval(function () {
+                        Swal.getContent().querySelector('strong')
+                          .textContent = Swal.getTimerLeft()
+                      }, 100)
+                    },
+                    onClose: function () {
+                      clearInterval(timerInterval)
+                    }
+                  }).then(function (result) {
+                        if (result.dismiss === Swal.DismissReason.timer) {
+                            window.location = "";
+                        }
+                  })
+                // Swal.fire({
+                //     icon: 'success',
+                //     title: data.message,
+                //     showConfirmButton: false,
+                //     timerProgressBar: true,
+                //     timer: 2000,
+                //     didOpen: () => {
+                //         Swal.showLoading()
+                //         const b = Swal.getHtmlContainer().querySelector('b')
+                //         timerInterval = setInterval(() => {
+                //         b.textContent = Swal.getTimerLeft()
+                //         }, 100)
+                //     },
+                //     willClose: () => {
+                //         clearInterval(timerInterval)
+                //     }
+                // }).then((result) => {
+                //     if (result.dismiss === Swal.DismissReason.timer) {
+                //     window.location = "";
+                //     }
+                // })
+            }
+        }
+    })
+});
 function salindata(f) {
     //kiri data clone
     if (f.salin_to.checked == true) {

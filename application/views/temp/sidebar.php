@@ -14,13 +14,14 @@
                 <li class=" nav-item"><a href="<?= base_url('dashboard') ?>"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Calender">Dashboard</span></a>
                 </li>
                 <?php if ($this->session->userdata('role') == 1) {?>
-                    <li class=" nav-item"><a href="#"><i class="feather icon-archive"></i><span class="menu-title" data-i18n="User">Table</span></a>
+                    <li class=" nav-item"><a href="#"><i class="feather icon-archive"></i><span class="menu-title" data-i18n="User">Form</span></a>
                         <ul class="menu-content">
                             <li><a href="<?= base_url('user/upload') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Upload</span></a>
                             </li>
                             <li><a href="<?= base_url('user/topup') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Top Up</span></a>
                             </li>
-                        
+                            <li><a href="<?= base_url('user/create') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Buat User</span></a>
+                            </li>
                         </ul>
                     </li>
                 <?php } ?>

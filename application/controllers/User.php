@@ -234,14 +234,14 @@ class User extends CI_Controller {
 		$role = $this->input->post('role');
 		$this->db->where('username',$username);
         $cek = $this->db->get('users')->num_rows();
-		if ($username == true && $nama == true  && $password == true && $role == true) {
+		if ($username == true && $nama == true  && $password == true) {
 			if ($password == $password_conf) {
 				if ($cek != true) {
 					$data = [
 						"nama" => $nama,
 						"username" => $username,
 						"password" => password_hash($password,PASSWORD_DEFAULT),
-						"role" => $role
+						"role" => 2
 					];
 					$this->db->insert('users',$data);
 					$msg = [

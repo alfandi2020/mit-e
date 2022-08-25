@@ -35,7 +35,7 @@
                                         <input type="text" name="nama" class="form-control" placeholder="asep" required>
                                     </fieldset>
                                 </div>
-                                <div class="col-xl-4 col-md-6 col-12 mb-1">
+                                <!-- <div class="col-xl-4 col-md-6 col-12 mb-1">
                                     <fieldset class="form-group">
                                         <span>Level User</span>
                                         <select required name="role" class="select2 form-control">
@@ -45,7 +45,7 @@
                                             <option value="4">Sub Koordinator</option>
                                         </select>
                                     </fieldset>
-                                </div>
+                                </div> -->
                                 <div class="col-xl-4 col-md-6 col-12">
                                     <fieldset class="form-group">
                                         <span>Date Created</span>
