@@ -50,6 +50,7 @@
                                         <th>Tanggal</th>
                                         <th>Nominal</th>
                                         <th style="text-align:right">Saldo</th>
+                                        <th>Agent</th>
                                         <!-- <th>Action</th> -->
                                         <!-- <th width="230">Action</th> -->
                                     </tr>
@@ -75,6 +76,7 @@
                                             <td style="color:white;"><?= $x->F?></td>
                                             <td style="color:white;"><?= $x->U?></td>
                                             <td style="color:white;" align="right"><?= "Rp.". number_format($x->saldo_akhir,0,".",".") ?></td>
+                                            <td style="color:white;"><?= $x->Z?></td>
                                        </tr>
                                     <?php
                                             }else{?>
