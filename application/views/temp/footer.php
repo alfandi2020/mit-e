@@ -42,7 +42,7 @@
                     'url' : 'get_data_pricelist',
                 },
                 'columns': [
-                    { data: 'nomor' },
+                    // { data: 'nomor' },
                     { data: 'maskapai_id' },
                     { data: 'origin' },
                     { data: 'destinasi' },

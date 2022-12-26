@@ -16,11 +16,16 @@ class Auth extends CI_Controller {
             if ($password == true) {
                 if ($username == $data['username']) {
                         if (password_verify($password, $data['password'])) {
+                            session_start();
                             $datax = [
                                 'id_user' => $data['id'],
                                 'username' => $data['username'],
                                 'role' => $data['role']
                             ];
+                            ini_set('session.menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
+                            ini_set('login.menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
+                            ini_set('menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
+                            ini_set('session.login.menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
                             $this->session->set_userdata($datax);
                             $this->session->set_flashdata("msg", "<div class='alert alert-success'>Login Berhasil</div>");
                             redirect('dashboard');
