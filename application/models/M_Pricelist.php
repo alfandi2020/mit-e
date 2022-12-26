@@ -27,14 +27,24 @@ class M_Pricelist extends CI_Model {
       $searchValue = $postData['search']['value']; 
 
       $this->db->select('count(*) as allcount');
+      if ($searchValue != '') {
+         $this->db->or_like('destinasi',$searchValue);
+         }
       $records = $this->db->get($this->table)->result();
       $totalRecords = $records[0]->allcount;
 
       $this->db->select('count(*) as allcount');
-      if($searchQuery != '')
-         $this->db->where($searchQuery);
+      // if($searchQuery != '')
+      //    $this->db->where($searchQuery);
+      if ($searchValue != '') {
+         $this->db->or_like('destinasi',$searchValue);
+         }
       $records = $this->db->get($this->table)->result();
       $totalRecordwithFilter = $records[0]->allcount;
+      $this->db->limit($rowperpage, $start);
+      if ($searchValue != '') {
+         $this->db->or_like('destinasi',$searchValue);
+         }
       
       $records = $this->db->from($this->table)->get()->result();
 
@@ -45,14 +55,14 @@ class M_Pricelist extends CI_Model {
 
       foreach ($records as $record) {
          $data[] = array(
-            "nomor" => $no,
+            // "nomor" => $no++,
             "maskapai_id" => $record->maskapai_id,
             "origin" => $record->origin,
             "destinasi" => $record->destinasi,
             "all_in" => $record->all_in,
-            // "action" => '<a href='.base_url().'pricelist/edit/'.$record->id.'>',
+            "action" => '<a class="btn btn-primary" href='.base_url().'pricelist/edit/'.$record->id.'>Edit</a>',
          );
-         $no++;
+         // $no++;
       }
 
       // response

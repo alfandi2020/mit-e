@@ -13,7 +13,7 @@
                      <table class="table" id="table-pricelist">
                         <thead>
                            <tr>
-                              <th>No.</th>
+                              <!-- <th>No.</th> -->
                               <th>Maskapai</th>
                               <th>Origin</th>
                               <th>Dest.</th>
