@@ -3,7 +3,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Upload </h4>
+                    <h4 class="card-title">Upload N-Gen</h4>
                 </div>
                 <form method="POST" action="<?= base_url('user/upload_file') ?>" enctype="multipart/form-data">
                     <div class="card-content">

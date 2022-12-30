@@ -16,7 +16,7 @@
             <?php if ($this->session->userdata('role') == 1) {?>
                 <li class=" nav-item"><a href="#"><i class="feather icon-archive"></i><span class="menu-title" data-i18n="User">Form</span></a>
                     <ul class="menu-content">
-                        <li><a href="<?= base_url('user/upload') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Upload</span></a>
+                        <li><a href="<?= base_url('user/upload') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Upload N-Gen</span></a>
                         </li>
                         <li><a href="<?= base_url('user/topup') ?>"><i class="feather icon-circle"></i><span class="menu-item" data-i18n="List">Top Up</span></a>
                         </li>
