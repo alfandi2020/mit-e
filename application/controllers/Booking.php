@@ -9,7 +9,7 @@ class Booking extends CI_Controller {
         // $this->load->library('Pdf');
         $this->load->model('M_Pricelist');
     }
-    function index()
+   public function b()
     {
         echo $this->uri->segment(3);
     }
