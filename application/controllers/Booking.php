@@ -12,7 +12,7 @@ class Booking extends CI_Controller {
    public function b()
     {
         $list = $this->db->get_where('mite_pricelist')->row_array();
-        $id = $this->uri->segment(4);
+        $id = $this->uri->segment(3);
         $data = [
             "role" => $this->session->userdata('role'),
             "id_pricelist" => $id,
