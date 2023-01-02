@@ -35,6 +35,18 @@ class Pricelist extends CI_Controller {
         $this->load->view('body/pricelist/create');
         $this->load->view('temp/footer');
     }
+    function edit(){
+        $id = $this->uri->segment(3);
+        $this->db->where('id',$id);
+        $data_des  =$this->db->get('mite_pricelist')->row_array();
+        $data = [
+			'title' => 'Edit daftar harga',
+			"destination" => $data_des,
+	    ];
+        $this->load->view('temp/header', $data);
+        $this->load->view('body/pricelist/create');
+        $this->load->view('temp/footer');
+    }
 
     function store() {
         $insert = [
