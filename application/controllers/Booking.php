@@ -19,7 +19,7 @@ class Booking extends CI_Controller {
             "all_in" => $list['all_in'],
         ];
         $this->db->insert('booking',$data);
-        echo '<script>location.replace("https://www.menindo.com")</script>';
+        // echo '<script>location.replace("https://www.menindo.com")</script>';
     }
     
 }
