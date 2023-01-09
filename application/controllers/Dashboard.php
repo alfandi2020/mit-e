@@ -20,6 +20,11 @@ class Dashboard extends CI_Controller {
 		$this->load->view('body/dashboard');
 		$this->load->view('temp/footer');
 	}
+	function logout(){
+		$array_items = array('id_user', 'username');
+		$this->session->unset_userdata($array_items);
+		redirect('auth');
+	}
     public function jam()
     {
         date_default_timezone_set('Asia/Jakarta'); //Menyesuaikan waktu dengan tempat kita tinggal

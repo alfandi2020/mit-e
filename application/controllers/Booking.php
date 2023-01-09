@@ -8,6 +8,22 @@ class Booking extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('M_Pricelist');
+        $this->load->model('M_Booking');
+    }
+    function index()
+	{
+		$data = [
+			"title" => "Booking"
+		];
+		$this->load->view('temp/header',$data);
+		$this->load->view('body/booking');
+		$this->load->view('temp/footer');
+	}
+    function get_data_booking()
+    {
+        $postData = $this->input->post();
+        $data = $this->M_Booking->get_datatables($postData);
+        echo json_encode($data);
     }
    public function b()
     {

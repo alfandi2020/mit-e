@@ -229,7 +229,7 @@ function range_excel($start = 'A', $end = 'ZZ'){
                                 <a class="dropdown-item"
                                     href="page-user-profile.html"><i class="feather icon-user"></i> Edit Profile</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="<?= base_url('auth/logout') ?>"><i
+                                <a class="dropdown-item" href="<?= base_url('dashboard/logout') ?>"><i
                                         class="feather icon-power"></i> Logout</a>
                             </div>
                         </li>

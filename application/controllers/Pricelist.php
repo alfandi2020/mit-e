@@ -25,7 +25,22 @@ class Pricelist extends CI_Controller {
 
         echo json_encode($data);
     }
-
+    function delete()
+    {
+        if ($this->uri->segment(4) == 'back') {
+            $id = $this->uri->segment(3);
+            $this->db->where('id',$id);
+            $this->db->set('status','1');
+            $this->db->update('mite_pricelist');
+            redirect('pricelist/index');
+        }else{
+            $id = $this->uri->segment(3);
+            $this->db->where('id',$id);
+            $this->db->set('status','0');
+            $this->db->update('mite_pricelist');
+            redirect('pricelist/index');
+        }
+    }
     function create() {
         $data = [
 			'title' => 'Tambah daftar harga',

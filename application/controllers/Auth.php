@@ -8,6 +8,9 @@ class Auth extends CI_Controller {
         parent::__construct();
         $this->load->library('session');
         $this->load->model('M_Auth');
+        if ($this->session->userdata('id_user') == true) {
+            redirect('dashboard');
+        }
     }
         function index(){
             $username = $this->input->post('username');
@@ -20,6 +23,7 @@ class Auth extends CI_Controller {
                             $datax = [
                                 'id_user' => $data['id'],
                                 'username' => $data['username'],
+                                'nama' => $data['nama'],
                                 'role' => $data['role']
                             ];
                             ini_set('session.menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
@@ -40,11 +44,7 @@ class Auth extends CI_Controller {
             }
             $this->load->view('Sign_in');
         }
-        function logout(){
-            $array_items = array('id_user', 'username');
-            $this->session->unset_userdata($array_items);
-            redirect('auth');
-        }
+        
     }
     
 

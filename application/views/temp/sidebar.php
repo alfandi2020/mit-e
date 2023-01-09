@@ -12,6 +12,7 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             <li class=" nav-item"><a href="<?= base_url('dashboard') ?>"><i class="feather icon-home"></i><span class="menu-title" data-i18n="Calender">Dashboard</span></a>
+            <li class=" nav-item"><a href="<?= base_url('booking') ?>"><i class="feather icon-book-open"></i><span class="menu-title" data-i18n="Calender">Booking</span></a>
             </li>
             <?php if ($this->session->userdata('role') == 1) {?>
                 <li class=" nav-item"><a href="#"><i class="feather icon-archive"></i><span class="menu-title" data-i18n="User">Form</span></a>

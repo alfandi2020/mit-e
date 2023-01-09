@@ -50,6 +50,21 @@
                     { data: 'action' },
                 ]
             });     
+            $('#table-booking').DataTable({
+                'processing': true,
+                'serverSide': true,
+                'serverMethod': 'post',
+                'ajax': {
+                    'url' : 'booking/get_data_booking',
+                },
+                'columns': [
+                    // { data: 'nomor' },
+                    { data: 'maskapai_id' },
+                    { data: 'origin' },
+                    { data: 'destinasi' },
+                    { data: 'action' },
+                ]
+            });     
         });
     </script>
 

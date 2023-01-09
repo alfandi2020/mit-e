@@ -2,9 +2,9 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class M_Pricelist extends CI_Model {
+class M_Booking extends CI_Model {
 
-   var $table = 'mite_pricelist';
+   var $table = 'booking';
    var $column_order = array(null, 'maskapai_id', 'origin', 'destinasi', 'all_in');
    var $column_search = array(null, 'maskapai_id', 'origin', 'destinasi', 'all_in');
    var $order = array('id' => 'asc');
@@ -61,10 +61,9 @@ class M_Pricelist extends CI_Model {
          }
          $data[] = array(
             // "nomor" => $no++,
-            "maskapai_id" => $record->maskapai_id,
-            "origin" => $record->origin,
-            "destinasi" => $record->destinasi,
-            "all_in" => $record->all_in,
+            "maskapai_id" => $record->all_in,
+            "origin" => $record->status,
+            "destinasi" => $record->date_created,
             "action" => '<a class="btn btn-primary" href='.base_url().'pricelist/edit/'.$record->id.'><i class="feather icon-edit"></i></a> '.$delete.'
             
             ',
