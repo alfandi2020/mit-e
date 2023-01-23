@@ -59,13 +59,17 @@
                 },
                 'columns': [
                     // { data: 'nomor' },
-                    { data: 'maskapai_id' },
                     { data: 'origin' },
                     { data: 'destinasi' },
+                    { data: 'price' },
+                    { data: 'weight' },
+                    { data: 'total' },
                     { data: 'action' },
                 ]
             });     
+
         });
+ 
     </script>
 
     <!-- BEGIN: Page Vendor JS-->

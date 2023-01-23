@@ -14,9 +14,11 @@
                         <thead>
                            <tr>
                               <!-- <th>No.</th> -->
-                              <th>Maskapai</th> 
-                              <th>Origin</th>
-                              <th>Dest.</th>
+                              <th>Origin</th> 
+                              <th>Destinasi</th>
+                              <th>Price</th>
+                              <th>Kg</th>
+                              <th>Total</th>
                               <th>Action</th>
                            </tr>
                         </thead>
