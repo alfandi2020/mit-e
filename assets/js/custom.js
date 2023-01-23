@@ -455,7 +455,43 @@ $(document).ready( function () {
         }
     })
 });
-
+$('.confirm-approve').on('click', function(e) {
+    e.preventDefault();
+    
+    const href = $(this).attr('href');
+    Swal.fire({
+    title: 'Yakin ingin approve',
+    text: "Top up Akan di approve !",
+    icon: 'warning',
+    showCancelButton: true,
+    cancelButtonColor: '#d33',
+    confirmButtonClass: 'btn btn-primary',
+    cancelButtonClass: 'btn btn-danger ml-1',
+    confirmButtonText: 'Ya, approve Data'
+    }).then((result) => {
+       
+    if (result.value) {
+        Swal.fire(
+            {
+              type: "success",
+              title: 'Approve!',
+              text: 'Data berhasil diapprove',
+              confirmButtonClass: 'btn btn-success',
+            }
+          )
+        setTimeout(() => {
+            document.location.href = href;
+        }, 2000);
+    }else if (result.dismiss === Swal.DismissReason.cancel) {
+        Swal.fire({
+          title: 'Cencel',
+          text: 'Data cancel approve',
+          type: 'error',
+          confirmButtonClass: 'btn btn-success',
+        })
+      }
+    })
+});
 $('.confirm-delete').on('click', function(e) {
     e.preventDefault();
     
@@ -493,6 +529,7 @@ $('.confirm-delete').on('click', function(e) {
       }
     })
 });
+
 // $('input[name="identitas"]').change(function(f) {
 //     let selectedValA = $(this).val();
 //     let isAChecked = $(this).prop("checked");

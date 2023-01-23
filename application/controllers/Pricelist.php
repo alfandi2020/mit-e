@@ -11,6 +11,7 @@ class Pricelist extends CI_Controller {
     }
     
     function index(){
+
         $data = [
 			'title' => 'Daftar harga',
 	    ];
@@ -18,7 +19,53 @@ class Pricelist extends CI_Controller {
         $this->load->view('body/pricelist/index');
         $this->load->view('temp/footer');
     }
+    function clean2($string) {
+		$string = str_replace(' ', '-', $string); // Replaces all spaces with hyphens.
+	 
+		return preg_replace('/[^A-Za-z0-9\-]/', '', $string); // Removes special chars.
+	 }
+     function status()
+     {
+        $id = $this->uri->segment(3);
+        $saldo = $this->uri->segment(4);
+        $id_user = $this->session->userdata('id_user');
+        // $this->db->set('saldo',$saldo);
+        $this->db->set('status','approve');
+        $this->db->where('id',$id);
+        $this->db->update('history_topup');
 
+        $get_user = $this->db->query("SELECT * FROM dt_agent where id_user='$id_user'")->row_array();
+        $total = $get_user['saldo'] + $saldo;
+        $this->db->set('saldo',$total);
+        $this->db->where('id_user',$id_user);
+        $this->db->update('dt_agent');
+        redirect('pricelist/topup');
+
+     }
+    function topup()
+    {
+        $saldo = $this->input->post('saldo');
+        $id_user = $this->session->userdata('id_user');
+        if ($saldo == true) {
+            $data = [
+                "kode_agent" => '111',
+                "id_user" => $id_user,
+                "saldo" => $this->clean2($saldo),
+                "status" => 'waiting'
+            ];
+            $this->db->insert('history_topup',$data);
+        }
+        $id_user = $this->session->userdata('id_user');
+        $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user' and status='waiting'")->result();
+        $data = [
+			"title" => "topup",
+            'agent' => $agent
+
+		];
+		$this->load->view('temp/header',$data);
+		$this->load->view('body/topup');
+		$this->load->view('temp/footer');
+    }
     function get_data_pricelist() {
         $postData = $this->input->post();
         $data = $this->M_Pricelist->get_datatables($postData);

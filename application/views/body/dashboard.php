@@ -1,17 +1,17 @@
 
                 <!-- Dashboard Analytics Start -->
-           <!--      <section id="dashboard-analytics">
+                <section id="dashboard-analytics">
                     <div class="row">
                         <div class="col-lg-4 col-md-6 col-12">
                             <div class="card">
                                 <div class="card-header d-flex align-items-start pb-0">
                                     <div>
-                                        <h2 class="text-bold-700 mb-0">850</h2>
-                                        <p>Total Pelanggan</p>
+                                        <h2 class="text-bold-700 mb-0">Rp.<?= number_format($saldoo) ?></h2>
+                                        <p>Saldo Agent</p>
                                     </div>
                                     <div class="avatar bg-rgba-primary p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-users text-primary font-medium-5"></i>
+                                            <i class="feather icon-dollar-sign text-primary font-medium-5"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -21,12 +21,12 @@
                             <div class="card">
                                 <div class="card-header d-flex align-items-start pb-0">
                                     <div>
-                                        <h2 class="text-bold-700 mb-0">Rp.132.220.000</h2>
-                                        <p>Pembayaran Belum Masuk</p>
+                                        <h2 class="text-bold-700 mb-0"><?= $total_pending ?></h2>
+                                        <p>Pending Top up</p>
                                     </div>
-                                    <div class="avatar bg-rgba-danger p-50 m-0">
+                                    <div class="avatar bg-rgba-warning p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-x-circle text-danger font-medium-5"></i>
+                                            <i class="feather icon-clock text-warning font-medium-5"></i>
                                         </div>
                                     </div>
                                 </div>
@@ -36,19 +36,19 @@
                             <div class="card">
                                 <div class="card-header d-flex align-items-start pb-0">
                                     <div>
-                                        <h2 class="text-bold-700 mb-0">Rp.42.120.000</h2>
-                                        <p>Pembayaran Sudah Masuk</p>
+                                        <h2 class="text-bold-700 mb-0">Rp.<?= number_format($pending_saldo) ?></h2>
+                                        <p>Total Pending Top Up</p>
                                     </div>
-                                    <div class="avatar bg-rgba-success p-50 m-0">
+                                    <div class="avatar bg-rgba-warning p-50 m-0">
                                         <div class="avatar-content">
-                                            <i class="feather icon-check-circle text-success font-medium-5"></i>
+                                            <i class="feather icon-clock text-warning font-medium-5"></i>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="row">
+                    <!-- <div class="row">
                             <div class="col-lg-4 col-md-12 col-12">
                                 <div class="card overlay-img-card text-white">
                                     <img src="<?= base_url() ?>assets/images/bg-lt.jpeg" class="card-img" alt="card-img-6">
@@ -117,8 +117,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     
                     
-                </section>-->
+                </section>
                 <!-- Dashboard Analytics end -->

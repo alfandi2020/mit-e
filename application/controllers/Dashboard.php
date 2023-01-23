@@ -13,11 +13,17 @@ class Dashboard extends CI_Controller {
 	}
 	public function index()
 	{
+		$id_user = $this->session->userdata('id_user');
+		$agent = $this->db->get_where('dt_agent',['id_user' => $id_user])->row_array();
+		$total = $this->db->query("SELECT *,SUM(saldo) as pending_saldo,COUNT(id) as pending FROM history_topup where status='waiting' and id_user='$id_user'")->row_array();
 		$data = [
-			"title" => "Dashboard"
+			"title" => "Dashboard",
+			"saldoo" => $agent['saldo'],
+			"pending_saldo" => $total['pending_saldo'],
+			"total_pending" => $total['pending']
 		];
 		$this->load->view('temp/header',$data);
-		$this->load->view('body/dashboard');
+		$this->load->view('body/dashboard',$data);
 		$this->load->view('temp/footer');
 	}
 	function logout(){
