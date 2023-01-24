@@ -7,6 +7,7 @@ class Pricelist extends CI_Controller {
     {
         parent::__construct();
         // $this->load->library('Pdf');
+        $this->load->helper('string');
         $this->load->model('M_Pricelist');
     }
     
@@ -47,16 +48,52 @@ class Pricelist extends CI_Controller {
         $saldo = $this->input->post('saldo');
         $id_user = $this->session->userdata('id_user');
         if ($saldo == true) {
+
+            $nominal = $this->clean2($saldo);
+
+            $sub = substr($nominal,-3);
+			$sub2 = substr($nominal,-2);
+			$sub3 = substr($nominal,-1);
+ 
+			$total =  random_string('numeric', 3);
+			$total2 =  random_string('numeric', 2);
+			$total3 =  random_string('numeric', 1);
+ 
+				if($sub==0){
+					$hasil =  $nominal + $total; 
+					// echo "No Unik :".$total."<br>"; 
+					// echo "Nominal Transfer : Rp. ".number_format($hasil,0,",",".");
+				} else if($sub2 == 0){
+					$hasil = $nominal + $total2; 
+					$no = substr($hasil,-3);
+					// echo "No Unik :".$no."<br>"; 
+					// echo "Nominal Transfer : Rp. ".number_format($hasil,0,",",".");
+				} else if($sub3 == 0){
+					$hasil = $nominal + $total3; 
+					$no = substr($hasil,-3);
+					// echo "No Unik :".$no."<br>"; 
+					// echo "Nominal Transfer : Rp. ".number_format($hasil,0,",",".");
+				}else{
+					// echo "No Unik :".$sub."<br>"; 
+					// echo "Nominal Transfer : Rp. ".number_format($nominal,0,",",".");
+				}
             $data = [
                 "kode_agent" => '111',
                 "id_user" => $id_user,
-                "saldo" => $this->clean2($saldo),
+                "saldo" => $hasil,
+                "kode_unik" => $total,
                 "status" => 'waiting'
             ];
             $this->db->insert('history_topup',$data);
+            $this->session->set_flashdata('msg','no_rek');
+            redirect('pricelist/topup');
         }
         $id_user = $this->session->userdata('id_user');
-        $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user' and status='waiting'")->result();
+        if ($this->session->userdata('role') == '1') {
+            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where status='waiting'")->result();
+        }else{
+            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user' and status='waiting'")->result();
+        }
         $data = [
 			"title" => "topup",
             'agent' => $agent

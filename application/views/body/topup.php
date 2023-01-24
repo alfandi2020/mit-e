@@ -95,6 +95,23 @@
                 <div class="card-header">
                     <h4 class="card-title">Table Top up</h4>
                 </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+                <script>   
+     
+                    <?php if($this->session->flashdata('msg') == 'no_rek'){ ?>
+                        $(document).ready( function () {
+                        Swal.fire(
+                                {
+                                type: "success",
+                                title: 'Silahkan transfer ke nomor berikut!',
+                                text: 'No Rekening : 43134351124 BCA a.n BDL Warehouse',
+                                confirmButtonClass: 'btn btn-success',
+                                });
+                            });
+
+                    <?php } ?>
+                </script>
                 <form method="POST" action="<?= base_url('user/agent') ?>">
                     <div class="card-content">
                         <div class="card-body">
