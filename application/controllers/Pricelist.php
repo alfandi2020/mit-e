@@ -85,7 +85,7 @@ class Pricelist extends CI_Controller {
                 "status" => 'waiting'
             ];
             $this->db->insert('history_topup',$data);
-            $this->session->set_flashdata('msg','no_rek');
+            $this->session->set_flashdata('msg','no_rek,'.'Rp.'.number_format($hasil,0,'.','.').'');
             redirect('pricelist/topup');
         }
         $id_user = $this->session->userdata('id_user');

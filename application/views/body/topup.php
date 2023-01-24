@@ -99,13 +99,15 @@
 
                 <script>   
      
-                    <?php if($this->session->flashdata('msg') == 'no_rek'){ ?>
+                    <?php 
+                    $ex_msg = explode(',',$this->session->flashdata('msg'));
+                    if($ex_msg[0] == 'no_rek'){ ?>
                         $(document).ready( function () {
                         Swal.fire(
                                 {
                                 type: "success",
                                 title: 'Silahkan transfer ke nomor berikut!',
-                                text: 'No Rekening : 43134351124 BCA a.n BDL Warehouse',
+                                text: 'Nominal : <?= $ex_msg[1]?> No Rekening : 43134351124 BCA a.n BDL Warehouse',
                                 confirmButtonClass: 'btn btn-success',
                                 });
                             });
