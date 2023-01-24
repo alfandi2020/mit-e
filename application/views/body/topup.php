@@ -145,7 +145,7 @@
                                         <?php if ($this->session->userdata('role') == '1') {?>
                                         <td>
                                             <a href="<?= base_url('pricelist/status/'.$x->id.'/'.$x->saldo) ?>" class="btn btn-primary confirm-approve"> Approve</a>
-                                            <a href="<?= base_url('user/delete/').$x->id ?>" class="btn btn-danger confirm-delete">Reject</a>
+                                            <a href="<?= base_url('pricelist/status/').$x->id . '/reject'?>" class="btn btn-danger confirm-reject">Reject</a>
                                         </td>
                                         <?php } ?>
                                     </tr>

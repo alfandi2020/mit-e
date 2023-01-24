@@ -29,17 +29,23 @@ class Pricelist extends CI_Controller {
      {
         $id = $this->uri->segment(3);
         $saldo = $this->uri->segment(4);
-        $id_user = $this->session->userdata('id_user');
-        // $this->db->set('saldo',$saldo);
-        $this->db->set('status','approve');
-        $this->db->where('id',$id);
-        $this->db->update('history_topup');
+        if ($this->uri->segment(4) == 'reject') {
+            $this->db->set('status','reject');
+            $this->db->where('id',$id);
+            $this->db->update('history_topup');
+        }else{
+            $id_user = $this->session->userdata('id_user');
+            // $this->db->set('saldo',$saldo);
+            $this->db->set('status','approve');
+            $this->db->where('id',$id);
+            $this->db->update('history_topup');
 
-        $get_user = $this->db->query("SELECT * FROM dt_agent where id_user='$id_user'")->row_array();
-        $total = $get_user['saldo'] + $saldo;
-        $this->db->set('saldo',$total);
-        $this->db->where('id_user',$id_user);
-        $this->db->update('dt_agent');
+            $get_user = $this->db->query("SELECT * FROM dt_agent where id_user='$id_user'")->row_array();
+            $total = $get_user['saldo'] + $saldo;
+            $this->db->set('saldo',$total);
+            $this->db->where('id_user',$id_user);
+            $this->db->update('dt_agent');
+        }
         redirect('pricelist/topup');
 
      }

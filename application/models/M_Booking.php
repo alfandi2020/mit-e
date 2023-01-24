@@ -57,91 +57,147 @@ class M_Booking extends CI_Model {
       $no = 1;
 
       foreach ($records as $record) {
-         if ($record->status_booking == 'approve') {
-            if ($record->file_smu == true) {
-               $file_smu = '<a class="btn btn-primary" download href="upload/smu/'.$record->file_smu.'">'.$record->file_smu.' <i class="feather icon-download"></i></a>';
-               $invs = 'invisible';
-               $color_smu = 'success';
-               $invs_smu = '';
-            }else{
-               $file_smu = '';
-               $invs = '';
-               $color_smu = 'primary';
-               $invs_smu = 'invisible';
+         $role = $this->session->userdata('role');
+         if ($role == '1') {
+            if ($record->status_booking == 'approve') {
+               if ($record->file_smu == true) {
+                  $file_smu = '<a class="btn btn-primary" download href="upload/smu/'.$record->file_smu.'">'.$record->file_smu.' <i class="feather icon-download"></i></a>';
+                  $invs = 'invisible';
+                  $color_smu = 'success';
+                  $invs_smu = '';
+               }else{
+                  $file_smu = '';
+                  $invs = '';
+                  $color_smu = 'primary';
+                  $invs_smu = 'invisible';
 
-            }
-            $action_status = '<button type="button" class="btn btn-'.$color_smu.'" data-toggle="modal" data-target="#exampleModal2'.$record->id_book.'">
-            SMU
-          </button>
-          <div class="modal fade" id="exampleModal2'.$record->id_book.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-               <form action="booking/status" method="POST" enctype="multipart/form-data">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">SMU</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                     </div>
-                     <div class="modal-body">
-                        <div class="row">
-                              <div class="col-xl-12">
-                                 <label>Upload SMU</label>
-                                 <input type="file" class="form-control" name="file_smu">
-                                 <input type="hidden" class="form-control" value='.$record->id_book.' name="id_book">
-                                 <input type="hidden" value="upload_smu" name="status">
-                              </div>
+               }
+               $action_status = '<button type="button" class="btn btn-'.$color_smu.'" data-toggle="modal" data-target="#exampleModal2'.$record->id_book.'">
+               SMU
+               </button>
+               <div class="modal fade" id="exampleModal2'.$record->id_book.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                  <form action="booking/status" method="POST" enctype="multipart/form-data">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SMU</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
                         </div>
-                        <div class="row mt-2">
-                           <div class="col-xl-12">
-                              '.$file_smu.'
+                        <div class="modal-body">
+                           <div class="row">
+                                 <div class="col-xl-12">
+                                    <label>Upload SMU</label>
+                                    <input type="file" class="form-control" name="file_smu">
+                                    <input type="hidden" class="form-control" value='.$record->id_book.' name="id_book">
+                                    <input type="hidden" value="upload_smu" name="status">
+                                 </div>
+                           </div>
+                           <div class="row mt-2">
+                              <div class="col-xl-12">
+                                 '.$file_smu.'
+                              </div>
                            </div>
                         </div>
-                     </div>
-                     <div class="modal-footer">
-                     <button type="submit" class="btn btn-primary '.$invs.'">Upload</button>
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cencel</button>
-                     </div>
-                  </div>
-               </form>
-            </div>
-         </div>
-         <button type="button" class="btn btn-warning '.$invs_smu.'" data-toggle="modal" data-target="#exampleModal3'.$record->id_book.'">
-            SELESAI ?
-          </button>
-          <div class="modal fade" id="exampleModal3'.$record->id_book.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered" role="document">
-               <form action="booking/status" method="POST" enctype="multipart/form-data">
-                  <div class="modal-content">
-                     <div class="modal-header">
-                     <h5 class="modal-title" id="exampleModalLabel">SMU</h5>
-                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                     </button>
-                     </div>
-                     <div class="modal-body ">
-                        <div class="row justify-content-center">
-                              <div class="col-xl-12">
-                                 <h6>Apakah paket sudah sampai tujuan ?</h6>
-                                 <h2 class="text-primary">Yakin Paket sudah sampai ?</h2>
-                                 <input type="hidden" class="form-control" value='.$record->id_book.' name="id_book">
-                                 <input type="hidden" value="selesai" name="status">
-                              </div>
+                        <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary '.$invs.'">Upload</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cencel</button>
                         </div>
                      </div>
-                     <div class="modal-footer">
-                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Cencel</button>
-                     <button type="submit" class="btn btn-primary">Ok</button>
-                     </div>
+                  </form>
+               </div>
+               </div>
+               <button type="button" class="btn btn-warning '.$invs_smu.'" data-toggle="modal" data-target="#exampleModal3'.$record->id_book.'">
+                  SELESAI ?
+               </button>
+               <div class="modal fade" id="exampleModal3'.$record->id_book.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel2" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered" role="document">
+                     <form action="booking/status" method="POST" enctype="multipart/form-data">
+                        <div class="modal-content">
+                           <div class="modal-header">
+                           <h5 class="modal-title" id="exampleModalLabel">SMU</h5>
+                           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                           </button>
+                           </div>
+                           <div class="modal-body ">
+                              <div class="row justify-content-center">
+                                    <div class="col-xl-12">
+                                       <h6>Apakah paket sudah sampai tujuan ?</h6>
+                                       <h2 class="text-primary">Yakin Paket sudah sampai ?</h2>
+                                       <input type="hidden" class="form-control" value='.$record->id_book.' name="id_book">
+                                       <input type="hidden" value="selesai" name="status">
+                                    </div>
+                              </div>
+                           </div>
+                           <div class="modal-footer">
+                           <button type="button" class="btn btn-secondary" data-dismiss="modal">Cencel</button>
+                           <button type="submit" class="btn btn-primary">Ok</button>
+                           </div>
+                        </div>
+                     </form>
                   </div>
-               </form>
-            </div>
-         </div>
-          ';
-         }else if($record->status_booking == 'selesai'){
-            $action_status = '<b class="btn btn-success">SELESAI</b>';
-         }else{
-            $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'pricelist/edit/'.$record->id_book.'/reject>Reject</a>';
+               </div>
+               ';
+            }else if($record->status_booking == 'selesai'){
+               $action_status = '<b class="btn btn-success">SELESAI</b>';
+            }else{
+               $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'pricelist/edit/'.$record->id_book.'/reject>Reject</a>';
+            }
+         }else {
+            if ($record->status_booking == 'selesai') {
+               $action_status = '<b class="btn btn-success">SELESAI</b>';
+            }else if($record->status_booking == 'approve'){
+               if ($record->file_smu == true) {
+                  $file_smu = '<a class="btn btn-primary" download href="upload/smu/'.$record->file_smu.'">'.$record->file_smu.' <i class="feather icon-download"></i></a>';
+                  $invs = 'invisible';
+                  $color_smu = 'success';
+                  $invs_smu = '';
+                  $wait_smu = 'Sudah Upload SMU';
+               }else{
+                  $file_smu = '';
+                  $invs = '';
+                  $color_smu = 'primary';
+                  $invs_smu = 'invisible';
+                  $wait_smu = 'Menunggu Upload SMU';
+               }
+               $action_status = '<button type="button" class="btn btn-'.$color_smu.'" data-toggle="modal" data-target="#exampleModal2'.$record->id_book.'">
+               SMU
+               </button>
+               <div class="modal fade" id="exampleModal2'.$record->id_book.'" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                     <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SMU</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                           <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                           <div class="row">
+                                 <div class="col-xl-12">
+                                    <h4>File SMU</h4>
+                                 </div>
+                           </div>
+                           <div class="row mt-2">
+                              <div class="col-xl-12">
+                              '.$wait_smu.'
+                                 '.$file_smu.'
+                              </div>
+                           </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cencel</button>
+                        </div>
+                     </div>
+               </div>
+               </div>
+               
+               ';
+            }else{
+               $action_status = '';
+            }
          }
          $data[] = array(
             // "nomor" => $no++,
