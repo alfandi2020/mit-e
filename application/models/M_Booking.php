@@ -40,6 +40,7 @@ class M_Booking extends CI_Model {
       if ($searchValue != '') {
          $this->db->or_like('destinasi',$searchValue);
          }
+         $this->db->order_by('id', 'DESC');
       $records = $this->db->get($this->table)->result();
       $totalRecordwithFilter = $records[0]->allcount;
       $this->db->limit($rowperpage, $start);
@@ -49,6 +50,7 @@ class M_Booking extends CI_Model {
       // $this->db->where('b.status','Waiting');
       $this->db->select('*,b.status as status_booking,b.id as id_book');
       $this->db->join('mite_pricelist as a','b.id_pricelist=a.id');
+      $this->db->order_by('b.id', 'DESC');
       $records = $this->db->from('booking as b')->get()->result();
 
       $data = array();
@@ -86,6 +88,13 @@ class M_Booking extends CI_Model {
                         </button>
                         </div>
                         <div class="modal-body">
+                           <div class="row">
+                                 <div class="col-xl-12">
+                                 <label>Nomor SMU</label>
+                                 <input type="text" class="form-control" name="no_smu">
+                                 </div>
+                           </div>
+                           <br>
                            <div class="row">
                                  <div class="col-xl-12">
                                     <label>Upload SMU</label>
@@ -141,7 +150,7 @@ class M_Booking extends CI_Model {
                </div>
                ';
             }else if($record->status_booking == 'selesai'){
-               $action_status = '<b class="btn btn-success">SELESAI</b>';
+               $action_status = '<b class="btn btn-success">SAMPAI TUJUAN</b>';
             }else{
                $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'pricelist/edit/'.$record->id_book.'/reject>Reject</a>';
             }
@@ -154,7 +163,7 @@ class M_Booking extends CI_Model {
                   $invs = 'invisible';
                   $color_smu = 'success';
                   $invs_smu = '';
-                  $wait_smu = 'Sudah Upload SMU';
+                  $wait_smu = 'No SMU : '.$record->no_smu.' <br>File SMU : <br>';
                }else{
                   $file_smu = '';
                   $invs = '';
@@ -180,8 +189,9 @@ class M_Booking extends CI_Model {
                                     <h4>File SMU</h4>
                                  </div>
                            </div>
-                           <div class="row mt-2">
+                           <div class="row">
                               <div class="col-xl-12">
+                              
                               '.$wait_smu.'
                                  '.$file_smu.'
                               </div>

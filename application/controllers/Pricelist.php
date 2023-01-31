@@ -40,10 +40,10 @@ class Pricelist extends CI_Controller {
             $this->db->where('id',$id);
             $this->db->update('history_topup');
 
-            $get_user = $this->db->query("SELECT * FROM dt_agent where id_user='$id_user'")->row_array();
+            $get_user = $this->db->query("SELECT * FROM dt_agent where id_user='32'")->row_array();
             $total = $get_user['saldo'] + $saldo;
             $this->db->set('saldo',$total);
-            $this->db->where('id_user',$id_user);
+            $this->db->where('id_user','32');
             $this->db->update('dt_agent');
         }
         redirect('pricelist/topup');
@@ -51,6 +51,7 @@ class Pricelist extends CI_Controller {
      }
     function topup()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $saldo = $this->input->post('saldo');
         $id_user = $this->session->userdata('id_user');
         if ($saldo == true) {
@@ -88,7 +89,8 @@ class Pricelist extends CI_Controller {
                 "id_user" => $id_user,
                 "saldo" => $hasil,
                 "kode_unik" => $total,
-                "status" => 'waiting'
+                "status" => 'waiting',
+                "date" => date('Y-m-d H:i:s')
             ];
             $this->db->insert('history_topup',$data);
             $this->session->set_flashdata('msg','no_rek,'.'Rp.'.number_format($hasil,0,'.','.').'');
@@ -98,7 +100,7 @@ class Pricelist extends CI_Controller {
         if ($this->session->userdata('role') == '1') {
             $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where status='waiting'")->result();
         }else{
-            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user' and status='waiting'")->result();
+            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user'")->result();
         }
         $data = [
 			"title" => "topup",

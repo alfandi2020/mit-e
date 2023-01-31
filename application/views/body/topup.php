@@ -126,7 +126,8 @@
                                         <th>Kode Agent</th>
                                         <th>Nama Agent</th>
                                         <th>Status</th>
-                                        <th style="text-align:right">Saldo</th> 
+                                        <th>Saldo</th> 
+                                        <th>Tanggal</th>
                                         <?php if ($this->session->userdata('role') == '1') {?>
                                         <th width="330">Action</th>
                                         <?php } ?>
@@ -139,9 +140,13 @@
                                         <td><?= $x->id_user ?></td>
                                         <td><?= $x->nama ?></td>
                                         <td><?php if($x->status == 'waiting'){
-                                            echo '<b class="btn btn-warning">Waiting</b>';
+                                            echo '<b class="btn btn-warning">Menunggu</b>';
+                                        }else{
+                                            echo '<b class="btn btn-success">Diapprove</b>';
                                         } ?></td>
-                                        <td align="right"><?= "Rp.". number_format($x->saldo,0,".",".") ?></td>
+                                        <td><?= "Rp.". number_format($x->saldo,0,".",".") ?></td>
+                                        
+                                        <td><?= $x->date ?></td>
                                         <?php if ($this->session->userdata('role') == '1') {?>
                                         <td>
                                             <a href="<?= base_url('pricelist/status/'.$x->id.'/'.$x->saldo) ?>" class="btn btn-primary confirm-approve"> Approve</a>
