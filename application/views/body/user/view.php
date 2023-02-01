@@ -8,7 +8,32 @@
                 </div>
                 <div class="card-content">
                     <div class="card-body card-dashboard">
-                        
+                        <button type="button" data-toggle="modal" data-target="#exampleModal" class="btn btn-primary">Tambah User</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <label for="">Username</label>
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Simpan</button>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        <br><br>
                         <div class="table-responsive">
                             <table class="table zero-configuration">
                                 <thead>
@@ -17,7 +42,8 @@
                                         <th>Nama</th>
                                         <th>Username</th>
                                         <th>Level</th>
-                                        <th width="230">Action</th>
+                                        <th>Saldo Agent</th>
+                                        <th width="430">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -37,6 +63,13 @@
                                             $role = 'Super Admin';
                                         }
                                         echo $role; ?></td>
+                                        <td><?php 
+                                        if ($x->role == 2) {
+                                           echo 'Rp.'. number_format($x->saldo);
+                                        }else{
+                                            echo '';
+                                        }
+                                        ?></td>
                                         <td>
                                             <button id="<?= $x->id ?>" class="btn btn-primary update-user"> <i class="feather icon-edit"></i> Edit</button>&nbsp;&nbsp;
                                             <?php if ($x->role != 1) { ?>

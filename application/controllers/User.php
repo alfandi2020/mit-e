@@ -15,8 +15,9 @@ class User extends CI_Controller {
 	}
 	public function index()
 	{
+		$user = $this->db->query("SELECT * from users as a left join dt_agent as b on(a.id=b.id_user)")->result();
 		$data = [
-			'user' => $this->db->get('users')->result(),
+			'user' => $user,
 			'title' => 'List User'
 		];
 		$this->load->view('temp/header',$data);
