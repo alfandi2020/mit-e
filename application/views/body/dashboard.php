@@ -7,7 +7,7 @@
                                 <div class="card-header d-flex align-items-start pb-0">
                                     <div>
                                         <h2 class="text-bold-700 mb-0">Rp.<?= number_format($saldoo) ?></h2>
-                                        <p>Saldo Agent</p>
+                                        <p>Saldo <?= $this->session->userdata('role') == 1 ? 'admin' : 'agent' ?></p>
                                     </div>
                                     <div class="avatar bg-rgba-primary p-50 m-0">
                                         <div class="avatar-content">
