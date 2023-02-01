@@ -44,6 +44,18 @@ class Booking extends CI_Controller {
             $this->db->set('status',$status);
             $this->db->where('id',$id);
             $this->db->update('booking');
+            
+            //balikin saldo
+            $history_book = $this->db->query("SELECT *,b.saldo + a.all_in * a.weight as total_saldo_kembali FROM booking as a left join dt_agent as b on(a.id_user = b.id_user) where a.id='$id'")->row_array();
+            if ($history_book['product'] == 'Door to Port') {
+                $charge_tambah = 3000;
+            }else{
+                $charge_tambah = 0;
+            }
+            $return_saldo = $history_book['total_saldo_kembali'] + $charge_tambah;
+            $this->db->set('saldo',$return_saldo);
+            $this->db->where('id_user',$history_book['id_user']);
+            $this->db->update('dt_agent');
         }else if($this->input->post('status') == 'upload_smu'){
             $idd = $this->input->post('id_book');
             $no_smu = $this->input->post('no_smu');

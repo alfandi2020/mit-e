@@ -30,10 +30,10 @@ class M_Booking extends CI_Model {
       if ($searchValue != '') {
          $this->db->or_like('destinasi',$searchValue);
          }
-      // $this->db->where('status','Waiting');
+      $this->db->where('status','Waiting');
       $records = $this->db->get($this->table)->result();
       $totalRecords = $records[0]->allcount;
-      // $this->db->where('status','Waiting');
+      $this->db->where('status','Waiting');
       $this->db->select('count(*) as allcount');
       // if($searchQuery != '')
       //    $this->db->where($searchQuery);
@@ -47,7 +47,7 @@ class M_Booking extends CI_Model {
       if ($searchValue != '') {
          $this->db->or_like('destinasi',$searchValue);
          }
-      // $this->db->where('b.status','Waiting');
+      $this->db->where('b.status','Waiting');
       $this->db->select('*,b.status as status_booking,b.id as id_book');
       $this->db->join('mite_pricelist as a','b.id_pricelist=a.id');
       $this->db->order_by('b.id', 'DESC');
@@ -61,6 +61,11 @@ class M_Booking extends CI_Model {
       foreach ($records as $record) {
          $role = $this->session->userdata('role');
          if ($role == '1') {
+            if ($record->product == 'Door to Port') {
+               $charge_product = 3000;
+            }else{
+               $charge_product = 0;
+            }
             if ($record->status_booking == 'approve') {
                if ($record->file_smu == true) {
                   $file_smu = '<a class="btn btn-primary" download href="upload/smu/'.$record->file_smu.'">'.$record->file_smu.' <i class="feather icon-download"></i></a>';
@@ -152,7 +157,7 @@ class M_Booking extends CI_Model {
             }else if($record->status_booking == 'selesai'){
                $action_status = '<b class="btn btn-success">SAMPAI TUJUAN</b>';
             }else{
-               $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'pricelist/edit/'.$record->id_book.'/reject>Reject</a>';
+               $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'booking/status/'.$record->id_book.'/reject>Reject</a>';
             }
          }else {
             if ($record->status_booking == 'selesai') {
@@ -213,9 +218,9 @@ class M_Booking extends CI_Model {
             // "nomor" => $no++,
             "origin" => $record->origin,
             "destinasi" => $record->destinasi,
-            "price" => "Rp." . number_format($record->all_in),
+            "price" => "Rp." . number_format($record->all_in + $charge_product),
             "weight" => $record->weight,
-            "total" => "Rp." . number_format($record->all_in*$record->weight),
+            "total" => "Rp." . number_format($record->all_in*$record->weight + $charge_product),
             "action" => $action_status,
          );
          // $no++;
