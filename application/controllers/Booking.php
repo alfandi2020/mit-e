@@ -31,12 +31,16 @@ class Booking extends CI_Controller {
         $status = $this->uri->segment(4);
         // $nominal = $this->uri->segment(4);
         if ($status == 'approve') {
-            $get_agent = $this->db->query("SELECT *,b.saldo - a.all_in * a.weight as total FROM booking as a left join dt_agent as b on(a.id_user=b.id_user) where a.id='$id'")->row_array();
+            $get_agent = $this->db->query("SELECT * FROM booking where id='$id'")->row_array();
             // $total = 
-            $this->db->set('saldo',$get_agent['total']);
-            $this->db->where('id_user',$get_agent['id_user']);
-            $x = $this->db->update('dt_agent');
-       
+            $get_admin = $this->db->get_where('dt_agent',['id_user' => $this->session->userdata('id_user')])->row_array();
+            //update saldo mit-e
+            $total_x = intval($get_admin['saldo']) + $get_agent['fee_mite'];
+            $this->db->set('saldo',$total_x);
+            $this->db->where('id_user',$this->session->userdata('id_user'));
+            $this->db->update('dt_agent');
+
+            //status
             $this->db->set('status',$status);
             $this->db->where('id',$id);
             $this->db->update('booking');
