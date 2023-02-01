@@ -60,12 +60,13 @@ class M_Booking extends CI_Model {
 
       foreach ($records as $record) {
          $role = $this->session->userdata('role');
+         if ($record->product == 'Door to Port') {
+            $charge_product = 3000;
+         }else{
+            $charge_product = 0;
+         }
          if ($role == '1') {
-            if ($record->product == 'Door to Port') {
-               $charge_product = 3000;
-            }else{
-               $charge_product = 0;
-            }
+
             if ($record->status_booking == 'approve') {
                if ($record->file_smu == true) {
                   $file_smu = '<a class="btn btn-primary" download href="upload/smu/'.$record->file_smu.'">'.$record->file_smu.' <i class="feather icon-download"></i></a>';
@@ -221,6 +222,7 @@ class M_Booking extends CI_Model {
             "price" => "Rp." . number_format($record->all_in + $charge_product),
             "weight" => $record->weight,
             "total" => "Rp." . number_format($record->all_in*$record->weight + $charge_product),
+            "tanggal" => $record->date_created,
             "action" => $action_status,
          );
          // $no++;

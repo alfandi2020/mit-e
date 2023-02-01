@@ -19,6 +19,7 @@
                               <th>Price</th>
                               <th>Kg</th>
                               <th>Total</th>
+                              <th>Tanggal</th>
                               <th>Action</th>
                            </tr>
                         </thead>

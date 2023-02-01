@@ -64,6 +64,7 @@
                     { data: 'price' },
                     { data: 'weight' },
                     { data: 'total' },
+                    { data: 'tanggal' },
                     { data: 'action' },
                 ]
             });     
