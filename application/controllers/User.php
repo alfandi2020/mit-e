@@ -166,7 +166,7 @@ class User extends CI_Controller {
 		$this->db->insert('history_topup',$history);
 		redirect('user/topup');
 	}
-	$agentt = $this->db->query("SELECT * FROM dt_agent as a left join history_topup as b on(a.id_user=b.id_user) ORDER BY b.id")->result();
+	$agentt = $this->db->query("SELECT * FROM dt_agent as a left join history_topup as b on(a.id_user=b.id_user) ORDER BY b.date desc")->result();
 	$data = [
 			'title' => 'Topup',
 			'agent' => $agentt,
