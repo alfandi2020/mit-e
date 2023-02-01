@@ -163,7 +163,7 @@ class M_Booking extends CI_Model {
                   $invs = 'invisible';
                   $color_smu = 'success';
                   $invs_smu = '';
-                  $wait_smu = 'No SMU : '.$record->no_smu.' <br>File SMU : <br>';
+                  $wait_smu = 'No SMU : '.$record->no_smu == "" ? "" : $record->no_smu.' <br>File SMU : <br>';
                }else{
                   $file_smu = '';
                   $invs = '';
