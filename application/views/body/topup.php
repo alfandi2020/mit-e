@@ -137,7 +137,7 @@
                                     <?php $no=1; foreach ($agent as $x) {?>
                                     <tr>
                                         <td><?= $no++; ?></td>
-                                        <td><?= $x->id_user ?></td>
+                                        <td><?= $x->kode_agent ?></td>
                                         <td><?= $x->nama ?></td>
                                         <td><?php if($x->status == 'waiting'){
                                             echo '<b class="btn btn-warning">Menunggu</b>';
