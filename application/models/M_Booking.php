@@ -220,6 +220,11 @@ class M_Booking extends CI_Model {
             }else{
                $net = $record->net;
             }
+            if ($record->fee_mite == "") {
+              $feee = 0;
+            }else{
+               $feee = $record->fee_mite;
+            }
          $data[] = array(
             // "nomor" => $no++,
             "origin" => $record->origin,
@@ -228,7 +233,7 @@ class M_Booking extends CI_Model {
             "weight" => $record->weight,
             "total" => "Rp." . number_format($record->all_in*$record->weight + $charge_product),
             "net" => "Rp." . number_format($net),
-            "fee" => "Rp." . number_format($record->fee_mite,0,'.','.'),
+            "fee" => "Rp." . number_format($feee),
             "tanggal" => $record->date_created,
             "action" => $action_status,
          );
