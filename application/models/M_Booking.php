@@ -60,6 +60,16 @@ class M_Booking extends CI_Model {
 
       foreach ($records as $record) {
             $role = $this->session->userdata('role');
+            // $this->db->where('nama_inggris',$this->input->get('inputProduct'));
+			   // $get_product = $this->db->get('jenis_product')->result();
+            // $charge_product = 0;
+            // foreach ($get_product as $x) {
+            //    if ($record->product == $x->nama_inggris) {
+            //       $charge_product = $x->handling;
+            //    }else{
+            //       $charge_product = 0;
+            //    }
+            // }
             if ($record->product == 'Door to Port') {
                $charge_product = 3000;
             }else{
