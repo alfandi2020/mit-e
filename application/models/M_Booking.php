@@ -66,7 +66,16 @@ class M_Booking extends CI_Model {
                $charge_product = 0;
             }
             if ($role == '1') {
-
+               if ($record->net == "") {
+                  $net = '';
+               }else{
+                  $net = "Rp." . number_format($record->net);
+               }
+               if ($record->fee_mite == "") {
+                 $feee = '';
+               }else{
+                  $feee = "Rp." . number_format($record->fee_mite);
+               }
                if ($record->status_booking == 'approve') {
                   if ($record->file_smu == true) {
                      $file_smu = '<a class="btn btn-primary" download href="upload/smu/'.$record->file_smu.'">'.$record->file_smu.' <i class="feather icon-download"></i></a>';
@@ -161,6 +170,8 @@ class M_Booking extends CI_Model {
                   $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'booking/status/'.$record->id_book.'/reject>Reject</a>';
                }
             }else {
+               $net = '';
+               $feee = '';
                if ($record->status_booking == 'selesai') {
                   $action_status = '<b class="btn btn-success">SELESAI</b>';
                }else if($record->status_booking == 'approve'){
@@ -214,16 +225,6 @@ class M_Booking extends CI_Model {
                }else{
                   $action_status = '';
                }
-            }
-            if ($record->net == "") {
-               $net = '';
-            }else{
-               $net = "Rp." . number_format($record->net);
-            }
-            if ($record->fee_mite == "") {
-              $feee = '';
-            }else{
-               $feee = "Rp." . number_format($record->fee_mite);
             }
          $data[] = array(
             // "nomor" => $no++,

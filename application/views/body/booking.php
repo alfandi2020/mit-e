@@ -19,8 +19,15 @@
                               <th>Price</th>
                               <th>Kg</th>
                               <th>Total</th>
-                              <th>Net</th>
-                              <th>Fee</th>
+                              <th>
+                              <?php if ($this->session->userdata('role') == '1') { 
+                                 echo 'Net';
+                                 }?>
+                                 
+                              </th>
+                              <th>           <?php if ($this->session->userdata('role') == '1') { 
+                                 echo 'Fee';
+                                 }?></th>
                               <th>Tanggal</th>
                               <th>Action</th>
                            </tr>
