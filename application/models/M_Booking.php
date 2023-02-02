@@ -222,6 +222,8 @@ class M_Booking extends CI_Model {
             "price" => "Rp." . number_format($record->all_in + $charge_product),
             "weight" => $record->weight,
             "total" => "Rp." . number_format($record->all_in*$record->weight + $charge_product),
+            "net" => "Rp." . number_format($record->net),
+            "fee" => "Rp." . number_format($record->fee_mite),
             "tanggal" => $record->date_created,
             "action" => $action_status,
          );

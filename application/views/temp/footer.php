@@ -64,6 +64,8 @@
                     { data: 'price' },
                     { data: 'weight' },
                     { data: 'total' },
+                    { data: 'net' },
+                    { data: 'fee' },
                     { data: 'tanggal' },
                     { data: 'action' },
                 ]

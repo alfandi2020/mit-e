@@ -19,6 +19,8 @@
                               <th>Price</th>
                               <th>Kg</th>
                               <th>Total</th>
+                              <th>Net</th>
+                              <th>Fee Mit-e</th>
                               <th>Tanggal</th>
                               <th>Action</th>
                            </tr>
