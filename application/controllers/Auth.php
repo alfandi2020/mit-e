@@ -24,7 +24,8 @@ class Auth extends CI_Controller {
                                 'id_user' => $data['id'],
                                 'username' => $data['username'],
                                 'nama' => $data['nama'],
-                                'role' => $data['role']
+                                'role' => $data['role'],
+                                'inkoppas' => $data['inkoppas']
                             ];
                             ini_set('session.menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
                             ini_set('login.menindo.com', substr_count($_SERVER['SERVER_NAME'],'.') > 1 ? ('.'.substr($_SERVER['SERVER_NAME'], strpos($_SERVER['SERVER_NAME'], '.') + 1)) : ('.'.$_SERVER['SERVER_NAME']));
