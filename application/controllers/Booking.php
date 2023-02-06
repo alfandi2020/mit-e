@@ -51,8 +51,9 @@ class Booking extends CI_Controller {
             
             //balikin saldo
             $history_book = $this->db->query("SELECT *,b.saldo + a.all_in * a.weight as total_saldo_kembali FROM booking as a left join dt_agent as b on(a.id_user = b.id_user) where a.id='$id'")->row_array();
-            if ($history_book['product'] == 'Door to Port') {
-                $charge_tambah = 3000;
+            $get_product = $this->db->get_where("jenis_product",['nama_inggris' => $history_book['product']])->row_array();
+            if ($history_book['product'] == $get_product['nama_inggris']) {
+                $charge_tambah = $get_product['handling'];
             }else{
                 $charge_tambah = 0;
             }
