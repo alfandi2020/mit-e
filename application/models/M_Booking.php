@@ -48,9 +48,9 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
       // $this->db->where('b.status','Waiting');
-      $this->db->select('*,b.status as status_booking,b.id as id_book');
+      $this->db->select('*,b.status as status_booking,b.id as id_book,b.all_in as all_in_book');
       $this->db->join('mite_pricelist as a','b.id_pricelist=a.id');
-      $this->db->order_by('b.id', 'DESC');
+      $this->db->order_by('b.date_created', 'DESC');
       $records = $this->db->from('booking as b')->get()->result();
 
       $data = array();
@@ -70,11 +70,11 @@ class M_Booking extends CI_Model {
             //       $charge_product = 0;
             //    }
             // }
-            if ($record->product == 'Door to Port') {
-               $charge_product = 3000;
-            }else{
-               $charge_product = 0;
-            }
+            // if ($record->product == 'Door to Port') {
+            //    $charge_product = 3000;
+            // }else{
+            //    $charge_product = 0;
+            // }
             if ($role == '1') {
                if ($record->net == "") {
                   $net = '';
@@ -240,9 +240,9 @@ class M_Booking extends CI_Model {
             // "nomor" => $no++,
             "origin" => $record->origin,
             "destinasi" => $record->destinasi,
-            "price" => "Rp." . number_format($record->all_in + $charge_product),
+            "price" => "Rp." . number_format($record->all_in_book),
             "weight" => $record->weight,
-            "total" => "Rp." . number_format($record->all_in*$record->weight + $charge_product),
+            "total" => "Rp." . number_format($record->all_in_book*$record->weight),
             "net" => $net,
             "fee" => $feee,
             "tanggal" => $record->date_created,
