@@ -177,7 +177,13 @@ class M_Booking extends CI_Model {
                }else if($record->status_booking == 'selesai'){
                   $action_status = '<b class="btn btn-success">SAMPAI TUJUAN</b>';
                }else{
-                  $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> <a class="btn btn-danger" href='.base_url().'booking/status/'.$record->id_book.'/reject>Reject</a>';
+                  if ($record->status_booking == 'reject') {
+                     $action_status = '<b class="btn btn-danger"><i class="feather icon-x-circle"></i> direject</b>';
+                  }else{
+                     $action_status = '<a class="btn btn-primary" href='.base_url().'booking/status/'.$record->id_book.'/approve>Approve</a> 
+                     <a class="btn btn-danger" href='.base_url().'booking/status/'.$record->id_book.'/reject>Reject</a>';
+                  }
+                  
                }
             }else {
                $net = '';
