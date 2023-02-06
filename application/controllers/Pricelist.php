@@ -98,9 +98,9 @@ class Pricelist extends CI_Controller {
         }
         $id_user = $this->session->userdata('id_user');
         if ($this->session->userdata('role') == '1') {
-            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where status='waiting'")->result();
+            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where status='waiting' order by b.date desc ")->result();
         }else{
-            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user'")->result();
+            $agent = $this->db->query("SELECT * from users as a left join history_topup as b on(a.id=b.id_user) where a.id='$id_user' order by  b.date desc")->result();
         }
         $data = [
 			"title" => "topup",
