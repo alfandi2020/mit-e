@@ -28,6 +28,7 @@
                               <th>           <?php if ($this->session->userdata('role') == '1') { 
                                  echo 'Fee';
                                  }?></th>
+                              <th>Company</th>
                               <th>Tanggal</th>
                               <th>Action</th>
                            </tr>

@@ -66,6 +66,7 @@
                     { data: 'total' },
                     { data: 'net' },
                     { data: 'fee' },
+                    { data: 'company' },
                     { data: 'tanggal' },
                     { data: 'action' },
                 ]

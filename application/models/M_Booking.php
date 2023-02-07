@@ -31,6 +31,9 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
       // $this->db->where('status','Waiting');
+      if ($this->session->userdata('id_user') == true) {
+         $this->db->where('id_user',$this->session->userdata('id_user'));
+      }
       $records = $this->db->get($this->table)->result();
       $totalRecords = $records[0]->allcount;
       // $this->db->where('status','Waiting');
@@ -41,6 +44,9 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
          $this->db->order_by('id', 'DESC');
+         if ($this->session->userdata('id_user') == true) {
+            $this->db->where('id_user',$this->session->userdata('id_user'));
+         }
       $records = $this->db->get($this->table)->result();
       $totalRecordwithFilter = $records[0]->allcount;
       $this->db->limit($rowperpage, $start);
@@ -48,6 +54,9 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
       // $this->db->where('b.status','Waiting');
+      if ($this->session->userdata('id_user') == true) {
+         $this->db->where('b.id_user',$this->session->userdata('id_user'));
+      }
       $this->db->select('*,b.status as status_booking,b.id as id_book,b.all_in as all_in_book');
       $this->db->join('mite_pricelist as a','b.id_pricelist=a.id');
       $this->db->order_by('b.date_created', 'DESC');
@@ -251,6 +260,7 @@ class M_Booking extends CI_Model {
             "total" => "Rp." . number_format($record->all_in_book*$record->weight),
             "net" => $net,
             "fee" => $feee,
+            "company" => $record->company,
             "tanggal" => $record->date_created,
             "action" => $action_status,
          );
