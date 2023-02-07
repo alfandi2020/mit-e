@@ -31,7 +31,8 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
       // $this->db->where('status','Waiting');
-      if ($this->session->userdata('id_user') == true) {
+      if ($this->session->userdata('role') == '2' && $this->session->userdata('id_user') == true) {
+
          $this->db->where('id_user',$this->session->userdata('id_user'));
       }
       $records = $this->db->get($this->table)->result();
@@ -44,7 +45,8 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
          $this->db->order_by('id', 'DESC');
-         if ($this->session->userdata('id_user') == true) {
+         if ($this->session->userdata('role') == '2' && $this->session->userdata('id_user') == true) {
+
             $this->db->where('id_user',$this->session->userdata('id_user'));
          }
       $records = $this->db->get($this->table)->result();
@@ -54,7 +56,7 @@ class M_Booking extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
       // $this->db->where('b.status','Waiting');
-      if ($this->session->userdata('id_user') == true) {
+      if ($this->session->userdata('role') == '2' && $this->session->userdata('id_user') == true) {
          $this->db->where('b.id_user',$this->session->userdata('id_user'));
       }
       $this->db->select('*,b.status as status_booking,b.id as id_book,b.all_in as all_in_book');
