@@ -15,6 +15,7 @@ class Dashboard extends CI_Controller {
 	{
 		$id_user = $this->session->userdata('id_user');
 		$agent = $this->db->get_where('dt_agent',['id_user' => $id_user])->row_array();
+		// $total = $this->db->query("SELECT *,SUM(saldo) as pending_saldo,COUNT(id) as pending FROM history_topup where status='waiting' and id_user='$id_user'")->row_array();
 		$total = $this->db->query("SELECT *,SUM(saldo) as pending_saldo,COUNT(id) as pending FROM history_topup where status='waiting' and id_user='$id_user'")->row_array();
 		$data = [
 			"title" => "Dashboard",

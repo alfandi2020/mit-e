@@ -9,26 +9,24 @@
          <div class="card">
             <div class="card-header">
                <div class="card-title">
-                  Daftar Harga
+                  Daftar Inventori
                </div>
-               <a href="<?= base_url('pricelist/create') ?>" class="btn btn-primary">Tambah</a>
+               <a href="<?= base_url('inventori/tambah_barang') ?>" class="btn btn-primary">Tambah</a>
             </div>
             <div class="card-content">
                <div class="card-body">
                   <div class="table-responsive">
-                     <table class="table" id="table-pricelist">
+                     <table class="table" id="table-inventori">
                         <thead>
                            <tr>
                               <!-- <th>No.</th> -->
-                              <th>Maskapai</th>
-                              <th>Origin</th>
-                              <th>Dest.</th>
-                              <th>All in</th>
+                              <th>Nama Barang</th>
+                              <th>Jumlah</th>
+                              <th>Berat</th>
+                              <th>Pengirim</th>
                               <th>Action</th>
                            </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
                      </table>
                   </div>
                </div>

@@ -145,10 +145,11 @@ class Pricelist extends CI_Controller {
     function edit(){
         $id = $this->uri->segment(3);
         $this->db->where('id',$id);
-        $data_des  =$this->db->get('mite_pricelist')->row_array();
+        $data_pricelist  =$this->db->get('mite_pricelist')->row_array();
         $data = [
 			'title' => 'Edit daftar harga',
-			"destination" => $data_des,
+			"pricelist" => $data_pricelist,
+			"destination" => $this->db->order_by('destinasi', 'asc')->get('mite_destinasi')->result(),
 	    ];
         $this->load->view('temp/header', $data);
         $this->load->view('body/pricelist/create');

@@ -47,21 +47,21 @@
                               <label for="inputMaskapai">Airline</label>
                               <select name="inputMaskapai" id="" class="form-control" data-live-search="true">
                                  <option>Choose Airline ...</option>
-                                 <option <?= $destination['maskapai_id'] == 'CTL' ? 'selected' : '' ?> value="CTL">Citilink</option>
-                                 <option <?= $destination['maskapai_id'] == 'GIA' ? 'selected' : '' ?> value="GIA">Garuda Indonesia</option>
-                                 <option <?= $destination['maskapai_id'] == 'LAG' ? 'selected' : '' ?> value="LAG">Lion Air Group</option>
+                                 <option <?= $pricelist['maskapai_id'] == 'CTL' ? 'selected' : '' ?> value="CTL">Citilink</option>
+                                 <option <?= $pricelist['maskapai_id'] == 'GIA' ? 'selected' : '' ?> value="GIA">Garuda Indonesia</option>
+                                 <option <?= $pricelist['maskapai_id'] == 'LAG' ? 'selected' : '' ?> value="LAG">Lion Air Group</option>
                               </select>
                            </div>
-                           <div class="form-group col-md-6">
+                           <!-- <div class="form-group col-md-6">
                               <label for="inputProduct">Product Type</label>
                               <select name="inputProduct" id="" class="form-control" data-live-search="true">
                                  <option>Choose Product Type...</option>
-                                 <option <?= $destination['origin'] == 'Port to Port"' ? 'selected' : '' ?> value="Port to Port">Port to Port</option>
-                                 <option <?= $destination['origin'] == 'Port to Door"' ? 'selected' : '' ?>  value="Port to Door">Port to Door</option>
-                                 <option <?= $destination['origin'] == 'Door to Port"' ? 'selected' : '' ?> value="Door to Port">Door to Port</option>
-                                 <option <?= $destination['origin'] == 'Door to Door"' ? 'selected' : '' ?> value="Door to Door">Door to Door</option>
+                                 <option <?= $pricelist['origin'] == 'Port to Port"' ? 'selected' : '' ?> value="Port to Port">Port to Port</option>
+                                 <option <?= $pricelist['origin'] == 'Port to Door"' ? 'selected' : '' ?> value="Port to Door">Port to Door</option>
+                                 <option <?= $pricelist['origin'] == 'Door to Port"' ? 'selected' : '' ?> value="Door to Port">Door to Port</option>
+                                 <option <?= $pricelist['origin'] == 'Door to Door"' ? 'selected' : '' ?> value="Door to Door">Door to Door</option>
                               </select>
-                           </div>
+                           </div> -->
                         </div>
                         <div class="form-row">
                            <div class="form-group col-md-6">
@@ -69,19 +69,19 @@
                               <select name="inputOrigin" class="form-control" data-live-search="true">
                                  <!-- <select id="inputState" class="form-control se"> -->
                                  <option>Choose Origin...</option>
-                                 <option value="CGK">JAKARTA (CENGKARENG)</option>
-                                 <option value="HLP">JAKARTA (HALIM PERDANAKUSUMA)</option>
+                                 <option <?= $pricelist['origin'] == 'CGK' ? 'selected' : '' ?> value="CGK">JAKARTA (CENGKARENG)</option>
+                                 <option <?= $pricelist['origin'] == 'HLP' ? 'selected' : '' ?> value="HLP">JAKARTA (HALIM PERDANAKUSUMA)</option>
                               </select>
                            </div>
                            <div class="form-group col-md-6">
                               <label for="inputDest">Destination</label>
-                              <select name="inputDest" class="form-control" data-live-search="true">
+                              <select name="inputDest" class="form-control select2" data-live-search="true">
                                  <!-- <select id="inputState" class="form-control se"> -->
                                  <option>Choose Destination...</option>
                                  <?php 
                                  foreach($destination as $d) {
                                     ?>
-                                 <option value="<?= $d->kode_destinasi ?>"><?= $d->destinasi?></option>
+                                 <option <?= $pricelist['destinasi'] == $d->kode_destinasi ? 'selected' : '' ?> value="<?= $d->kode_destinasi ?>">(<?= $d->kode_destinasi ?>) - <?= $d->destinasi?></option>
                                  <?php
                                  }
                                  ?>
@@ -91,7 +91,7 @@
                         <div class="form-row">
                            <div class="form-group col-md-4">
                               <label for="inputBasic">SMU Basic</label>
-                              <input type="text" class="form-control" value="<?= $destination['smu_basic'] ?>" name="inputBasic" id="inputBasic" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Basic price">
+                              <input type="text" class="form-control" value="<?= $pricelist['smu_basic'] ?>" name="inputBasic" id="inputBasic" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Basic price">
                            </div>
                            <div class="form-group col-md-4">
                               <label for="inputTax">Tax 11%</label>
@@ -105,25 +105,25 @@
                         <div class="form-row">
                            <div class="form-group col-md-6">
                               <label for="inputRA">Regulated Agent</label>
-                              <input type="text" class="form-control" value="<?= $destination['r_a'] ?>" name="inputRA" id="inputRA" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Regulated Agent">
+                              <input type="text" class="form-control" value="<?= $pricelist['r_a'] ?>" name="inputRA" id="inputRA" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Regulated Agent">
                            </div>
                            <div class="form-group col-md-6">
                               <label for="inputWarehouse">Warehouse</label>
-                              <input type="text" class="form-control" name="inputWarehouse"  value="<?= $destination['warehouse'] ?>" id="inputWarehouse" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Warehouse">
+                              <input type="text" class="form-control" name="inputWarehouse"  value="<?= $pricelist['warehouse'] ?>" id="inputWarehouse" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Warehouse">
                            </div>
                         </div>
                         <div class="form-row">
                            <div class="form-group col-md-4">
                               <label for="inputIhc">IHC</label>
-                              <input type="text" class="form-control"  value="<?= $destination['ihc'] ?>" name="inputIhc" id="inputIhc" onFocus="startCalc();" onBlur="stopCalc();" placeholder="IHC">
+                              <input type="text" class="form-control"  value="<?= $pricelist['ihc'] ?>" name="inputIhc" id="inputIhc" onFocus="startCalc();" onBlur="stopCalc();" placeholder="IHC">
                            </div>
                            <div class="form-group col-md-4">
                               <label for="inputHandling">Handling</label>
-                              <input type="text" class="form-control" name="inputHandling"  value="<?= $destination['handling'] ?>" id="inputHandling" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Handling">
+                              <input type="text" class="form-control" name="inputHandling"  value="<?= $pricelist['handling'] ?>" id="inputHandling" onFocus="startCalc();" onBlur="stopCalc();" placeholder="Handling">
                            </div>
                            <div class="form-group col-md-4">
                               <label for="inputAllin">All in</label>
-                              <input type="text" class="form-control" name="inputAllin"  value="<?= $destination['all_in'] ?>" id="inputAllin" onFocus="startCalc();" onBlur="stopCalc();" placeholder="All in">
+                              <input type="text" class="form-control" name="inputAllin"  value="<?= $pricelist['all_in'] ?>" id="inputAllin" onFocus="startCalc();" onBlur="stopCalc();" placeholder="All in">
                            </div>
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
@@ -186,7 +186,7 @@
                                     <!-- <select id="inputState" class="form-control se"> -->
                                     <option>Choose Destination...</option>
                                     <?php 
-                                    foreach($destination as $d) {
+                                    foreach($pricelist as $d) {
                                        ?>
                                     <option value="<?= $d->kode_destinasi ?>"><?= $d->destinasi?></option>
                                     <?php

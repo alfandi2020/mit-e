@@ -46,7 +46,7 @@ class M_Pricelist extends CI_Model {
          $this->db->or_like('destinasi',$searchValue);
          }
       
-      $records = $this->db->from($this->table)->get()->result();
+      $records = $this->db->from('mite_pricelist')->get()->result();
 
       $data = array();
       // aa
@@ -54,11 +54,11 @@ class M_Pricelist extends CI_Model {
       $no = 1;
 
       foreach ($records as $record) {
-         if ($record->status == '1') {
+         // if ($record->status == '1') {
             $delete = '<a class="btn btn-danger" href='.base_url().'pricelist/delete/'.$record->id.'><i class="feather icon-trash"></i></a>';
-         }else{
-            $delete = '<a class="btn btn-success" href='.base_url().'pricelist/delete/'.$record->id.'/back><i class="feather icon-refresh-ccw"></i></a>';
-         }
+         // }else{
+         //    $delete = '<a class="btn btn-success" href='.base_url().'pricelist/delete/'.$record->id.'/back><i class="feather icon-refresh-ccw"></i></a>';
+         // }
          $data[] = array(
             // "nomor" => $no++,
             "maskapai_id" => $record->maskapai_id,

@@ -9,26 +9,23 @@
          <div class="card">
             <div class="card-header">
                <div class="card-title">
-                  Daftar Harga
+                  Daftar Produk
                </div>
-               <a href="<?= base_url('pricelist/create') ?>" class="btn btn-primary">Tambah</a>
+               <a href="<?= base_url('produk/create') ?>" class="btn btn-primary"> Buat Paket </a>
+               <!-- <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPaket"> Show </button> -->
             </div>
             <div class="card-content">
                <div class="card-body">
                   <div class="table-responsive">
-                     <table class="table" id="table-pricelist">
+                     <table class="table" id="tabel-produk">
                         <thead>
                            <tr>
-                              <!-- <th>No.</th> -->
-                              <th>Maskapai</th>
-                              <th>Origin</th>
-                              <th>Dest.</th>
-                              <th>All in</th>
-                              <th>Action</th>
+                              <th>Kode Produk</th>
+                              <th>Stok</th>
+                              <th>Isi paket</th>
+                              <th>Aksi</th>
                            </tr>
                         </thead>
-                        <tbody>
-                        </tbody>
                      </table>
                   </div>
                </div>
