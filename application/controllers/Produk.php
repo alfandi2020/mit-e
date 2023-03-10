@@ -159,43 +159,91 @@ class Produk extends CI_Controller
 
    function tambah_jumlah_paket()
    {
-      $jumlah = $this->input->post('inputJumlahPaket');
-      $idPaket = $this->input->post('idPaket');
+      if ($_SESSION['id_user'] == "") {
+         redirect('dashboard');
+      } else {
+         $jumlah = $this->input->post('inputJumlahPaket');
+         $idPaket = $this->input->post('idPaket');
 
-      $records = $this->db->select('kode_barang, jumlah')->from('detail_produk')->where('kode_produk', $idPaket)->get()->result();
-      // $records = $this->db->where('kode_produk', $idPaket)->get('detail_produk')->result();
+         // $records = $this->db->select('kode_barang, jumlah')->from('detail_produk')->where('kode_produk', $idPaket)->get()->result();
+         // $records = $this->db->where('kode_produk', $idPaket)->get('detail_produk')->result();
 
-      $records = $this->db->select('kode_barang, nama_barang, detail_produk.jumlah')->from('detail_produk')->join('inventori', 'inventori.id = detail_produk.kode_barang')->where('kode_produk', $idPaket)->get()->result();
+         $records = $this->db->select('kode_barang, nama_barang, detail_produk.jumlah')->from('detail_produk')->join('inventori', 'inventori.id = detail_produk.kode_barang')->where('kode_produk', $idPaket)->get()->result();
 
 
-      foreach ($records as $r) {
-         $r_jumlah = $r->jumlah * $jumlah;
+         // looping untuk validasi
+         foreach ($records as $r) {
+            $r_jumlah = $r->jumlah * $jumlah;
 
-         $kode_barang = $r->kode_barang;
-         $nama_barang = $r->nama_barang;
+            $kode_barang = $r->kode_barang;
+            $nama_barang = $r->nama_barang;
+            $jumlah_detail = $r->jumlah;
 
-         $cek = $this->db->select('jumlah')->from('inventori')->where('id', $kode_barang)->get()->result();
+            $cek = $this->db->select('jumlah')->from('inventori')->where('id', $kode_barang)->get()->result();
 
-         foreach ($cek as $c) {
-            echo $c->jumlah . ' | ' . $kode_barang . ' | ' . $r_jumlah . '<br>';
-            if ($r_jumlah >= $c->jumlah) {
-               $this->session->set_flashdata('message_name', '<div class="alert alert-warning alert-dismissible fade show" role="alert">Stok ' . $nama_barang . ' tidak cukup.</div>');
+            foreach ($cek as $c) {
+               // echo $c->jumlah . ' | ' . $kode_barang . ' | ' . $r_jumlah . '<br>';
+               if ($r_jumlah >= $c->jumlah) {
+                  $this->session->set_flashdata('message_name', '<div class="alert alert-warning alert-dismissible fade show" role="alert">Stok ' . $nama_barang . ' tidak cukup.</div>');
 
-               redirect("produk/tambah_paket/" . $idPaket);
+                  redirect("produk/tambah_paket/" . $idPaket);
 
-               // echo 'stok <strong>' . $nama_barang . '</strong> tidak cukup <br>';
-            } else {
-               echo 'stok <strong>' . $nama_barang . '</strong> cukup <br>';
+                  // echo 'stok <strong>' . $nama_barang . '</strong> tidak cukup <br>';
+               }
             }
+            // echo $kode_barang . ' | ' . $r_jumlah . ' | ' . $jumlah_detail . ' <br>';
          }
-      }
 
-      // foreach ($b as $c) {
-      //    echo $c . '<br>';
-      // }
-      // echo '<pre>';
-      // var_dump($b);
-      // '</pre>';
-      exit;
+         // looping untuk buat paket
+         foreach ($records as $r) {
+            $r_jumlah = $r->jumlah * $jumlah;
+            $kode_barang = $r->kode_barang;
+
+            $cek = $this->db->select('jumlah')->from('inventori')->where('id', $kode_barang)->get()->result();
+
+            foreach ($cek as $c) {
+               $sisa_stok = $c->jumlah - $r_jumlah;
+               // echo $c->jumlah . ' | ' . $r_jumlah . ' | ' . $sisa_stok . ' <br>';
+               $data = [
+                  "jumlah" => $sisa_stok
+               ];
+
+               $this->db->where('id', $kode_barang);
+               $this->db->update('inventori', $data);
+            }
+            // echo $kode_barang . ' | ' . $r_jumlah . ' <br>';
+         }
+
+         $format = "%Y-%m-%d %h:%i:%s";
+
+         $insert = [
+            "kode_produk" => $idPaket,
+            "jumlah_paket" => $jumlah,
+            "status" => "in",
+            "user_input" => $_SESSION['id_user'],
+            "post_date" => mdate($format)
+         ];
+
+         // print_r($insert);
+         // exit;
+
+         $this->db->insert('history_produk', $insert);
+         $this->session->set_flashdata('message_name', '<div class="alert alert-primary" role="alert">Success</div>');
+
+         redirect("produk/index");
+
+
+         // variabel isi paket dibuat untuk looping pengurangan stok di inventori
+
+
+         // foreach ($b as $c) {
+         //    echo $c . '<br>';
+         // }
+         // echo '<pre>';
+         // var_dump($kode);
+         // '</pre>';
+         // exit;
+
+      }
    }
 }
